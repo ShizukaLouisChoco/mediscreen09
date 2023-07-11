@@ -32,4 +32,18 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.findAll();
     }
 
+    @Override
+    @Transactional
+    public Patient updatePatient(Patient patient) {
+        Optional<Patient> patientInDataBase =patientRepository.findById(patient.getId());
+        Patient patientToUpdate = patientInDataBase.orElseThrow();
+        patientToUpdate.setFamily(patient.getFamily());
+        patientToUpdate.setGiven(patient.getGiven());
+        patientToUpdate.setDob(patient.getDob());
+        patientToUpdate.setSex(patient.getSex());
+        patientToUpdate.setAddress(patient.getAddress());
+        patientToUpdate.setPhone(patient.getPhone());
+        return patientRepository.save(patientToUpdate);
+
+    }
 }

@@ -10,4 +10,7 @@ public interface PatientService {
     Patient getPatient(Long patientId);
 
     List<Patient> getPatients();
+
+    @Transactional
+    Patient updatePatient(Patient patient);
 }
