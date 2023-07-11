@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import static com.example.patient.entity.Patient.Gender.F;
+import static com.example.patient.entity.Patient.Gender.M;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
@@ -73,5 +74,23 @@ public class PatientServiceTest {
 
     }
 
+    @Test
+    public void updatePatientTest(){
+        // GIVEN
+        final Patient registeredPatient = new Patient(Long.valueOf(1),"TestNone","Test",LocalDate.of(1966,12,31),F, "1 Brookside St", "100-222-3333");
+        final Patient expectedPatient = new Patient(Long.valueOf(1),"expected","expected",LocalDate.of(1999,01,01),M, "1 expected St", "222-333-4444");
+        // WHEN
+        when(patientRepository.findById(registeredPatient.getId())).thenReturn(Optional.of(registeredPatient));
+        when(patientRepository.save(any(Patient.class))).thenAnswer(r -> r.getArguments()[0]);
+
+        var result = patientService.updatePatient(expectedPatient);
+
+        // THEN
+        verify(patientRepository,times(1)).save(any(Patient.class));
+
+        assertThat(result)
+                .isNotNull()
+                .satisfies(arg -> assertThat(arg).isEqualTo(expectedPatient));
+    }
 
 }
