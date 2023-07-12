@@ -41,8 +41,7 @@ public class Patient implements Serializable {
 
     public enum Gender {
         M,
-        F,
-        O
+        F
     }
 
 
