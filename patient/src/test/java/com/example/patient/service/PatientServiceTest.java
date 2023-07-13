@@ -93,4 +93,37 @@ public class PatientServiceTest {
                 .satisfies(arg -> assertThat(arg).isEqualTo(expectedPatient));
     }
 
+    @Test
+    public void createPatientTest(){
+        //GIVEN
+        final Patient expectedPatient = new Patient(Long.valueOf(1),"TestNone","Test",LocalDate.of(1966,12,31),F, "1 Brookside St", "100-222-3333");
+
+        //WHEN
+        when(patientRepository.findById(any())).thenReturn(Optional.empty());
+        when(patientRepository.save(any())).thenAnswer(p -> p.getArguments()[0]);
+
+        Patient result = patientService.createPatient(expectedPatient);
+        //THEN
+        verify(patientRepository,times(1)).save(any(Patient.class));
+        assertThat(result)
+                .isNotNull()
+                .satisfies(arg -> assertThat(arg).isEqualTo(expectedPatient));
+    }
+
+    @Test
+    public void createPatientThrowsExceptionTest(){
+        //GIVEN
+        final Patient registeredPatient = new Patient(Long.valueOf(1),"TestNone","Test",LocalDate.of(1966,12,31),F, "1 Brookside St", "100-222-3333");
+
+        //WHEN
+        when(patientRepository.findById(any())).thenReturn(Optional.of(registeredPatient));
+
+        //THEN
+        assertThatThrownBy(() -> {
+            patientService.createPatient(registeredPatient);
+        })
+                .isInstanceOf(PatientErrorException.class)
+                .hasMessageContaining("Patient already registered with id number : " + registeredPatient.getId());
+    }
+
 }
