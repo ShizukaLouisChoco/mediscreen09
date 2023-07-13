@@ -76,7 +76,7 @@ public class PatientController {
         model.addAttribute("patient",new Patient());
         patientService.updatePatient(patient);
         log.info("patient information updated");
-        //return "redirect:/patient/list";
+
         return "redirect:/patient/get?patientId=" + patientId;
     }
 }

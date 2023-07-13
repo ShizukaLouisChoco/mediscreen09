@@ -1,14 +1,25 @@
 package com.example.patient.controller;
 
+import com.example.patient.entity.Patient;
+import com.example.patient.service.PatientService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import java.time.LocalDate;
+
+import static com.example.patient.entity.Patient.Gender.F;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
@@ -18,6 +29,12 @@ public class PatientControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @Autowired
+    private PatientService patientService;
 
     @DisplayName("get patient displays patient.html")
     @Test
@@ -54,5 +71,56 @@ public class PatientControllerTest {
                 .andExpect(model().attributeExists("patients"));
     }
 
+    @DisplayName("get patient displays patient.html")
+    @Test
+    public void testGetPatientUpdateForm() throws Exception {
+        //GIVEN
+        final String url = "/patient/update/{patientId}";
+        Long patientId = 1L;
+        // WHEN
+        final var response = mockMvc.perform(get(url,patientId))
+                .andDo(MockMvcResultHandlers.print());
 
+
+        // THEN
+        response.andExpect(status().isOk())
+                .andExpect(view().name("/update"))
+                .andExpect(model().attributeExists("patient"));
+    }
+    @Test
+    @DisplayName("Test Update patient")
+    public void updatePatientTest() throws Exception {
+        //GIVEN
+        final String url = "/patient/update/{patientId}";
+        Patient expectedResult = new Patient(1L,"family","given", LocalDate.of(2002,01,01),F,"address","phone" );
+        assertThat(patientService.getPatient(expectedResult.getId())).isNotEqualTo(expectedResult);
+        //WHEN
+        final var result = mockMvc.perform(post(url,expectedResult.getId())
+                .param("id",expectedResult.getId().toString())
+                .param("family",expectedResult.getFamily())
+                .param("given",expectedResult.getGiven())
+                .param("dob",expectedResult.getDob().toString())
+                .param("sex",expectedResult.getSex().toString())
+                .param("address",expectedResult.getAddress())
+                .param("phone",expectedResult.getPhone())
+                .content(asJsonString(expectedResult))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON));
+
+        //THEN
+        result.andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/patient/get?patientId=" + expectedResult.getId()));
+
+        Patient updatedPatient = patientService.getPatient(expectedResult.getId());
+
+        assertThat(updatedPatient)
+                .isNotNull()
+                .satisfies(arg -> assertThat(arg).isEqualTo(expectedResult));
+
+    }
+
+    @SneakyThrows
+    protected String asJsonString(final Object obj) {
+        return objectMapper.writeValueAsString(obj);
+    }
 }
