@@ -20,7 +20,7 @@ public class Patient implements Serializable {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)
@@ -42,6 +42,14 @@ public class Patient implements Serializable {
     public enum Gender {
         M,
         F
+    }
+    public Patient(String family, String given, LocalDate dob, Gender sex, String address, String phone){
+        this.family = family;
+        this.given = given;
+        this.dob = dob;
+        this.sex = sex;
+        this.address = address;
+        this.phone = phone;
     }
 
 

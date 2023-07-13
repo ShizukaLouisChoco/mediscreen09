@@ -20,6 +20,10 @@ import java.time.LocalDate;
 import static com.example.patient.entity.Patient.Gender.F;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import java.time.LocalDate;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
@@ -119,6 +123,50 @@ public class PatientControllerTest {
 
     }
 
+    @DisplayName("display patient form")
+    @Test
+    public void testCreatePatientForm() throws Exception {
+        //GIVEN
+        final String url = "/patient/add";
+
+        // WHEN
+        final var response = mockMvc.perform(get(url))
+                .andDo(MockMvcResultHandlers.print());
+
+
+        // THEN
+        response.andExpect(status().isOk())
+                .andExpect(view().name("/add"))
+                .andExpect(model().attributeExists("patient"));
+    }
+
+
+    @DisplayName("get patients displays patient.html")
+    @Test
+    public void testCreatePatient() throws Exception {
+        //GIVEN
+        final String url = "/patient/add";
+        Patient patient = new Patient("family","given", LocalDate.of(2002,01,01), Patient.Gender.M,"address","phone");
+
+        // WHEN
+        final var response = mockMvc.perform(post(url)
+                .param("family",patient.getFamily())
+                .param("given",patient.getGiven())
+                .param("dob",patient.getDob().toString())
+                .param("sex",patient.getSex().toString())
+                .param("address",patient.getAddress())
+                .param("phone",patient.getPhone())
+                .content(asJsonString(patient))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print());
+
+        // THEN
+        Long patientId = patientService.getPatientByFamilyAndGiven(patient.getFamily(),patient.getGiven()).getId();
+        response.andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/patient/get?patientId=" + patientId));
+
+    }
     @SneakyThrows
     protected String asJsonString(final Object obj) {
         return objectMapper.writeValueAsString(obj);
