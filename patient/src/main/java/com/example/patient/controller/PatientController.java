@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -78,5 +79,40 @@ public class PatientController {
         log.info("patient information updated");
         //return "redirect:/patient/list";
         return "redirect:/patient/get?patientId=" + patientId;
+    }
+
+    /**
+     * GetMapping - add a new patient form
+     * url : http://localhost:8080/patient/add
+     * @return The saved patient object
+     */
+    @GetMapping(value = "/add")
+    public String createPatientForm(Model model){
+        log.info(".createPerson");
+        log.info("Accessed endpoint URL:/patient/add");
+        model.addAttribute("patient",new Patient());
+        return "/add";
+    }
+
+    /**
+     * PostMapping - add a new patient
+     * url : http://localhost:8080/patient/add
+     * @param patient to add
+     * @return The saved patient object
+     */
+    @PostMapping(value = "/add")
+    public String createPatient(Patient patient, Model model){
+        log.info(".createPerson");
+        log.info("Accessed endpoint URL:/patient");
+        log.debug("Request details: POSTMapping, Body patient :{}", patient);
+        model.addAttribute("patient", patient);
+        patientService.createPatient(patient);
+        List<Patient> patients = patientService.getPatientsByFamilyAndGiven(patient.getFamily(),patient.getGiven());
+        if(patients.size()==1){
+            Long registeredPatientId = patients.get(0).getId();
+            return "redirect:/patient/get?patientId="+ registeredPatientId;
+        }
+        Patient registeredPatient = patients.stream().filter(p -> p.getDob().isEqual(patient.getDob())).findFirst().orElseThrow();
+        return "redirect:/patient/get?patientId="+registeredPatient.getId();
     }
 }

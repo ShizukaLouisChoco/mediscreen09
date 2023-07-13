@@ -28,6 +28,17 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    public Patient getPatientByFamilyAndGiven(String family, String given) {
+        return patientRepository.findPatientByFamilyAndGiven(family, given)
+                .orElseThrow(()->new PatientErrorException("Patient not found with this name : " + family + given));
+    }
+    @Override
+    public List<Patient> getPatientsByFamilyAndGiven(String family, String given) {
+        return patientRepository.findPatientsByFamilyAndGiven(family, given)
+                .orElseThrow(()->new PatientErrorException("Patient not found with id : " + family + given));
+    }
+
+    @Override
     public List<Patient> getPatients() {
         return patientRepository.findAll();
     }
@@ -49,12 +60,11 @@ public class PatientServiceImpl implements PatientService {
     @Override
     @Transactional
     public Patient createPatient(Patient patient) throws PatientErrorException {
-        Optional<Patient> patientExists = patientRepository.findById(patient.getId());
-        if(patientExists.isPresent()){
-            throw new PatientErrorException("Patient already registered with id number : " + patient.getId());
+        List<Patient> patientNameExists = patientRepository.findPatientsByFamilyAndGiven(patient.getFamily(),patient.getGiven()).get().stream().filter(p -> p.getDob().isEqual(patient.getDob())).toList();
+        if(!patientNameExists.isEmpty()){
+            throw new PatientErrorException("This patient : " + patient.getFamily() + patient.getGiven() + "is already registered with id number : " + patientNameExists.get(0).getId());
         }
-
-        Patient newPatient = new Patient(patient.getId(),patient.getFamily(),patient.getGiven(),patient.getDob(),patient.getSex(),patient.getAddress(),patient.getPhone());
+        Patient newPatient = new Patient(null,patient.getFamily(),patient.getGiven(),patient.getDob(),patient.getSex(),patient.getAddress(),patient.getPhone());
         return patientRepository.save(newPatient);
     }
 }
