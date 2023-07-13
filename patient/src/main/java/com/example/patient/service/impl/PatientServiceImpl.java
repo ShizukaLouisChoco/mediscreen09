@@ -46,4 +46,15 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.save(patientToUpdate);
 
     }
+    @Override
+    @Transactional
+    public Patient createPatient(Patient patient) throws PatientErrorException {
+        Optional<Patient> patientExists = patientRepository.findById(patient.getId());
+        if(patientExists.isPresent()){
+            throw new PatientErrorException("Patient already registered with id number : " + patient.getId());
+        }
+
+        Patient newPatient = new Patient(patient.getId(),patient.getFamily(),patient.getGiven(),patient.getDob(),patient.getSex(),patient.getAddress(),patient.getPhone());
+        return patientRepository.save(newPatient);
+    }
 }

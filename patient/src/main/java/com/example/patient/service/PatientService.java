@@ -13,4 +13,7 @@ public interface PatientService {
 
     @Transactional
     Patient updatePatient(Patient patient);
+
+    @Transactional
+    Patient createPatient(Patient patient) throws PatientErrorException;
 }
