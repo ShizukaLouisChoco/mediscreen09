@@ -26,6 +26,12 @@ spring:
             - Path=/patient/**
           filters:
             - RewritePath=/patient/(?<path>.*), /$\{path}
+        - id: ui-service
+          uri: lb://ui-service
+          predicates:
+            - Path=/ui/**
+          filters:
+            - RewritePath=/ui/(?<path>.*), /$\{path}
         - id: openapi
           uri: http://localhost:${server.port}
           predicates:
@@ -38,6 +44,8 @@ springdoc:
     urls:
       - name: patient
         url: /v3/api-docs/patient
+      - name: ui
+        url: /v3/api-docs/ui
 
 management:
   tracing:

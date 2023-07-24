@@ -20,6 +20,8 @@
         <sonar.projectKey>example_mediscreen09</sonar.projectKey>
         <sonar.organization>example</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
     <modules>
@@ -27,6 +29,7 @@
         <module>config-service</module>
         <module>patient-service</module>
         <module>gateway-service</module>
+        <module>ui-service</module>
     </modules>
 
     <dependencyManagement>

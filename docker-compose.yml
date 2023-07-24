@@ -32,7 +32,7 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: docker
   patient-service:
-    image: example/patient-service:1.2-SNAPSHOT
+    image: example/patient-service:1.1-SNAPSHOT
     ports:
       - "8080"
     depends_on:
@@ -41,10 +41,10 @@ services:
     links:
       - config-service
       - discovery-service
+      - ui-service
       - zipkin
     environment:
       SPRING_PROFILES_ACTIVE: docker
-
   gateway-service:
     image: example/gateway-service:1.1-SNAPSHOT
     ports:
@@ -58,4 +58,19 @@ services:
       - config-service
       - discovery-service
       - patient-service
+      - ui-service
       - zipkin
+  ui-service:
+    image: example/ui-service:1.1-SNAPSHOT
+    ports:
+      - "9001"
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+    links:
+      - config-service
+      - discovery-service
+      - patient-service
+      - zipkin
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
