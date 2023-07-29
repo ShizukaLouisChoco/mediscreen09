@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "patient-service", url="localhost:9000")
+@FeignClient(name = "patient-service", url="patient-service")
 @LoadBalancerClient(name = "patient-service")
 public interface PatientProxy {
 
@@ -23,6 +23,7 @@ public interface PatientProxy {
 
     @PostMapping("/update/{patientId}")
     String updatePatient(@PathVariable("patientId") Long patientId, PatientBean patient);
+
     @GetMapping(value = "/add")
     String createPatientForm();
 

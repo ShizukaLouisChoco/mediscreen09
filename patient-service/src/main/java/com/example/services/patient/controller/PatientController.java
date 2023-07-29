@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Slf4j
-@Controller
+@RestController
 @RequestMapping(value="/patient")
 public class PatientController {
 
