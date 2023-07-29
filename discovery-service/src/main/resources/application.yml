@@ -1,11 +1,34 @@
-spring:
-  config:
-    import: "optional:configserver:http://config-service:8088"
-    activate:
-      on-profile: docker
----
+#spring:
+#  config:
+#    import: "optional:configserver:http://config-service:8088"
+#    activate:
+#      on-profile: docker
+#---
+
+server:
+  port: 8061
+
 spring:
   application:
     name: discovery-service
-  config:
-    import: "optional:configserver:http://localhost:8088"
+  output:
+    ansi:
+      enabled: always
+  cloud:
+    config:
+      import-check:
+        enabled: false
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0

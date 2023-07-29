@@ -4,7 +4,6 @@ import com.example.services.patient.entity.Patient;
 import com.example.services.patient.exception.PatientErrorException;
 import com.example.services.patient.service.PatientService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Slf4j
-@Controller
+@RestController
 @RequestMapping(value="/patient")
 public class PatientController {
 
