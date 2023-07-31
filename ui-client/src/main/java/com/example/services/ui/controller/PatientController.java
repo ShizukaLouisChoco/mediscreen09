@@ -19,7 +19,7 @@ public class PatientController {
         this.noteProxy = noteProxy;
     }
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String accueil(Model model){
          model.addAttribute("patients",patientProxy.getAllPatients());
         return "patientPage";

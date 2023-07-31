@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "note-service", url="localhost:8888")
+@FeignClient(name = "note-service", url="localhost:9100")
 public interface NoteProxy {
     //CREATE
     @PostMapping(value = "/notes")
