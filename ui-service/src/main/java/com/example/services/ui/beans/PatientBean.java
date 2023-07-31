@@ -1,4 +1,4 @@
-package com.example.services.ui.bean;
+package com.example.services.ui.beans;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

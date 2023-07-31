@@ -1,22 +1,20 @@
 package com.example.services.ui.proxies;
 
-import com.example.services.ui.bean.PatientBean;
-import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
+import com.example.services.ui.beans.PatientBean;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "patient-service", url="patient-service")
-@LoadBalancerClient(name = "patient-service")
+@FeignClient(name = "patient-service", url="localhost:9001")
+//@LoadBalancerClient(name = "patient-service")
 public interface PatientProxy {
 
-    @GetMapping("/list")
+    @GetMapping("/patients")
     String getAllPatients();
 
-    @GetMapping("/get")
-    String getPatient(@RequestParam("patientId") final String patientId);
+    @GetMapping("/patients/{id}")
+    String getPatient(@PathVariable Long id);
 
     @GetMapping("/update/{patientId}")
     String updatePatientPage(@PathVariable("patientId") Long patientId);

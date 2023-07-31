@@ -1,11 +1,12 @@
 package com.example.services.ui.controller;
 
-import com.example.services.ui.bean.PatientBean;
+import com.example.services.ui.beans.PatientBean;
 import com.example.services.ui.proxies.PatientProxy;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 public class PatientController {
 
     private final PatientProxy patientProxy;
@@ -15,38 +16,38 @@ public class PatientController {
         this.patientProxy = patientProxy;
     }
 
-    @GetMapping("/list")
-    public String getAllPatients(Model model){
+    @RequestMapping("/")
+    public String accueil(Model model){
          model.addAttribute("patients",patientProxy.getAllPatients());
         return "/patient";
     }
-    @GetMapping("/get")
-    public String getPatient(@RequestParam("patientId") final String patientId, Model model){
-        model.addAttribute("patient",patientProxy.getPatient(patientId));
+    @GetMapping("/patient-service/{id}")
+    public String getPatient(@PathVariable Long id, Model model){
+        model.addAttribute("patient",patientProxy.getPatient(id));
         return "/patient";
     }
 
-    @GetMapping("/update/{patientId}")
-    public String updatePatientPage(@PathVariable("patientId") Long patientId, Model model) {
-        model.addAttribute("patient", patientProxy.getPatient(patientId.toString()));
+    /*@GetMapping("/pa/{id}")
+    public String updatePatientPage(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("patient", patientProxy.getPatient(id));
         return "/update";
-    }
+    }*/
 
-    @PostMapping("/update/{patientId}")
-    public String updatePatient(@PathVariable("patientId") Long patientId, PatientBean patient,Model model) {
+    @PutMapping("/patients/{id}")
+    public String updatePatient(@PathVariable Long id, PatientBean patient,Model model) {
         model.addAttribute("patient",new PatientBean());
-        patientProxy.updatePatient(patientId,patient);
-       return "redirect:/patient/get?patientId=" + patientId;
+        patientProxy.updatePatient(id,patient);
+       return "redirect:/patients/" + id;
     }
 
-    @GetMapping(value = "/add")
+    /*@GetMapping(value = "/add")
     public String createPatientForm(Model model){
         model.addAttribute("patient",new PatientBean());
         return "/add";
-    }
+    }*/
 
-    @PostMapping(value = "/add")
-    public String createPatient(PatientBean patient, Model model){
+    @PostMapping(value = "/patients")
+    public String createPatient(@RequestBody PatientBean patient, Model model){
         model.addAttribute("patient", patient);
         patientProxy.createPatient(patient);
         return "redirect:/patient/get?patientId="+patient.getId();
