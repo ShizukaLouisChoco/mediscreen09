@@ -40,7 +40,11 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public List<Patient> getPatients() {
-        return patientRepository.findAll();
+        List<Patient> patients = patientRepository.findAll();
+        if(patients.isEmpty()){
+            throw new PatientErrorException("No patient registered");
+        }
+        return patients;
     }
 
     @Override
@@ -60,11 +64,19 @@ public class PatientServiceImpl implements PatientService {
     @Override
     @Transactional
     public Patient createPatient(Patient patient) throws PatientErrorException {
-        List<Patient> patientNameExists = patientRepository.findPatientsByFamilyAndGiven(patient.getFamily(),patient.getGiven()).get().stream().filter(p -> p.getDob().isEqual(patient.getDob())).toList();
-        if(!patientNameExists.isEmpty()){
-            throw new PatientErrorException("This patient : " + patient.getFamily() + patient.getGiven() + "is already registered with id number : " + patientNameExists.get(0).getId());
+        boolean patientNameExists = patientRepository.findPatientsByFamilyAndGiven(patient.getFamily(),patient.getGiven()).isPresent();
+        if(patientNameExists){
+            throw new PatientErrorException("This patient : " + patient.getFamily() + patient.getGiven() + "is already registered");
+        }
+        if(patient.getId()>=0){
+
+        Patient newPatientWithId = new Patient(patient.getId(),patient.getFamily(),patient.getGiven(),patient.getDob(),patient.getSex(),patient.getAddress(),patient.getPhone());
+        return patientRepository.save(newPatientWithId);
+
         }
         Patient newPatient = new Patient(null,patient.getFamily(),patient.getGiven(),patient.getDob(),patient.getSex(),patient.getAddress(),patient.getPhone());
+
         return patientRepository.save(newPatient);
+
     }
 }

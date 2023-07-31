@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: patient-service
+  config:
+    import: "optional:configserver:http://localhost:8088"
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  datasource:
+    url: jdbc:mysql://localhost:3306/mediscreen
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  h2:
+    console:
+      enabled: false
+  main:
+    allow-circular-references: true

@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import static com.example.services.patient.entity.Patient.Gender.F;
@@ -96,13 +97,15 @@ public class PatientServiceTest {
     @Test
     public void createPatientTest(){
         //GIVEN
-        final Patient expectedPatient = new Patient(Long.valueOf(1),"TestNone","Test",LocalDate.of(1966,12,31),F, "1 Brookside St", "100-222-3333");
+        final Patient expectedPatient = new Patient(Long.valueOf(10L),"TestOne","Test",LocalDate.of(1966,12,31),F, "1 Brookside St", "100-222-3333");
 
         //WHEN
         when(patientRepository.findById(any())).thenReturn(Optional.empty());
+        when(patientRepository.findPatientsByFamilyAndGiven(any(),any())).thenReturn(Optional.empty());
         when(patientRepository.save(any())).thenAnswer(p -> p.getArguments()[0]);
 
         Patient result = patientService.createPatient(expectedPatient);
+
         //THEN
         verify(patientRepository,times(1)).save(any(Patient.class));
         assertThat(result)
@@ -115,15 +118,17 @@ public class PatientServiceTest {
         //GIVEN
         final Patient registeredPatient = new Patient(Long.valueOf(1),"TestNone","Test",LocalDate.of(1966,12,31),F, "1 Brookside St", "100-222-3333");
 
+        Optional<List<Patient>> patientOptional = Optional.of(List.of(registeredPatient));
+
         //WHEN
-        when(patientRepository.findById(any())).thenReturn(Optional.of(registeredPatient));
+        when(patientRepository.findPatientsByFamilyAndGiven(any(),any())).thenReturn(patientOptional);
 
         //THEN
         assertThatThrownBy(() -> {
             patientService.createPatient(registeredPatient);
         })
                 .isInstanceOf(PatientErrorException.class)
-                .hasMessageContaining("Patient already registered with id number : " + registeredPatient.getId());
+                .hasMessageContaining("This patient : " + registeredPatient.getFamily() + registeredPatient.getGiven() + "is already registered");
     }
 
 }
