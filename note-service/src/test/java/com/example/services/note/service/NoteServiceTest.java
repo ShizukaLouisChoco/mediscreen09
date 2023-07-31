@@ -90,6 +90,35 @@ public class NoteServiceTest {
                 .isNotNull()
                 .satisfies(arg -> assertThat(arg).isEqualTo(updateingNote));
     }
+    @Test
+    public void createNoteTest(){
+        //GIVEN
+        final Note newNote = new Note(10L,1L,"Note1", LocalDate.of(1966,12,31));
+        when(noteRepository.save(any())).thenAnswer(p -> p.getArguments()[0]);
+
+        //WHEN
+        Note result = noteService.addNote(newNote);
+
+        //THEN
+        verify(noteRepository,times(1)).save(any(Note.class));
+        assertThat(result)
+                .isNotNull()
+                .satisfies(arg -> assertThat(arg).isEqualTo(newNote));
+    }
+
+
+    @Test
+    public void deleteNoteTest(){
+        //GIVEN
+        final Note registeredNote = new Note(10L,1L,"Note1", LocalDate.of(1966,12,31));
+        when(noteRepository.findById(registeredNote.getId())).thenReturn(Optional.of(registeredNote));
+
+        //WHEN
+        noteService.deleteNoteById(registeredNote.getId());
+
+        //THEN
+        verify(noteRepository,times(1)).deleteById(registeredNote.getId());
+    }
 
 
 }
