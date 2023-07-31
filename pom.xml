@@ -30,6 +30,7 @@
         <module>patient-service</module>
         <module>gateway-service</module>
         <module>ui-service</module>
+        <module>note-service</module>
     </modules>
 
     <dependencyManagement>
