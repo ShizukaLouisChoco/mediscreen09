@@ -31,6 +31,7 @@
         <module>gateway-service</module>
         <module>ui-service</module>
         <module>note-service</module>
+        <module>report-service</module>
     </modules>
 
     <dependencyManagement>
