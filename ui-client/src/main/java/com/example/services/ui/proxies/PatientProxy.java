@@ -5,8 +5,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
-@FeignClient(name = "patient-service", url="localhost:9001")
+@FeignClient(name = "patient-service", url="localhost:9000")
 //@LoadBalancerClient(name = "patient-service")
 public interface PatientProxy {
 
@@ -16,16 +17,16 @@ public interface PatientProxy {
     @GetMapping("/patients/{id}")
     String getPatient(@PathVariable Long id);
 
-    @GetMapping("/update/{patientId}")
+    @GetMapping("/patients/update/{patientId}")
     String updatePatientPage(@PathVariable("patientId") Long patientId);
 
-    @PostMapping("/update/{patientId}")
+    @PutMapping("/patients/{patientId}")
     String updatePatient(@PathVariable("patientId") Long patientId, PatientBean patient);
 
-    @GetMapping(value = "/add")
+    @GetMapping(value = "/patients/add")
     String createPatientForm();
 
-    @PostMapping(value = "/add")
+    @PostMapping(value = "/patients/add")
     String createPatient(PatientBean patient);
 
   }
