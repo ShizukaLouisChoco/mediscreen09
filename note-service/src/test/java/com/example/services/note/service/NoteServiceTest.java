@@ -72,7 +72,24 @@ public class NoteServiceTest {
 
 
     }
+    @Test
+    public void updatePatientTest(){
+        // GIVEN
+        final Note registeredNote = new Note(1L,1L,"Note1", LocalDate.of(1966,12,31));
+        final Note updateingNote = new Note(1L,1L,"UpdatedNote1", LocalDate.of(2002,12,31));
+// WHEN
+        when(noteRepository.findById(registeredNote.getId())).thenReturn(Optional.of(registeredNote));
+        when(noteRepository.save(any(Note.class))).thenAnswer(r -> r.getArguments()[0]);
 
+        var result = noteService.updateNote(updateingNote);
+
+        // THEN
+        verify(noteRepository,times(1)).save(any(Note.class));
+
+        assertThat(result)
+                .isNotNull()
+                .satisfies(arg -> assertThat(arg).isEqualTo(updateingNote));
+    }
 
 
 }
