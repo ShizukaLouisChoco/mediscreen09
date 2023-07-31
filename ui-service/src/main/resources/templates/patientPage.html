@@ -25,6 +25,33 @@
                         <button><a th:href="@{/patient/update/{patientId}(patientId=${patient.id})}">Update</a></button>
                     </div>
                 </div>
+                <div class="col">
+                    <div th:if="${notes}">
+                        <h1>Patients all notes</h1>
+                        <table class="table table-striped text-center">
+                            <thead class="bg-success text-white font-weight-normal">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Note</th>
+                                <th scope="col">Action</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:if="${notes.isEmpty()}">
+                                <td colspan="3">No patients</td>
+                            </tr>
+                            <tr th:each="note, iterstat : ${notes}" th:class="${iterstat.odd}?'odd'">
+                                <td th:text="${note.id}"></td>
+                                <td th:text="${note.date}"></td>
+                                <td th:text="${note.note}"></td>
+                                <td><button><a th:href="@{/notes/{id}(id=${note.id})}">Update</a></button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

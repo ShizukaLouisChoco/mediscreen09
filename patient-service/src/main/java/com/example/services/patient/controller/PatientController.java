@@ -28,7 +28,7 @@ public class PatientController {
     @GetMapping("/patients")
     public List<Patient> getAllPatients(){
         log.info(".getAllPatients");
-        log.info("Accessed endpoint URL:/patient/list");
+        log.info("Accessed endpoint URL:/patients");
         log.debug("Request details: GETMapping");
         //model.addAttribute("patients",patientService.getPatients());
         //return "/patient";
@@ -38,7 +38,7 @@ public class PatientController {
 
     /**
      * GetMapping - Get patient
-     * url : http://localhost:8080/patient/get?patientId={patientId}
+     * url : http://localhost:8080/patients/{id}
      * @return patient info with patientId
      */
     @GetMapping("/patients/{id}")

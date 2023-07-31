@@ -1,6 +1,7 @@
 package com.example.services.ui.controller;
 
 import com.example.services.ui.beans.PatientBean;
+import com.example.services.ui.proxies.NoteProxy;
 import com.example.services.ui.proxies.PatientProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,21 +11,30 @@ import org.springframework.web.bind.annotation.*;
 public class PatientController {
 
     private final PatientProxy patientProxy;
+    private final NoteProxy noteProxy;
 
 
-    public PatientController(PatientProxy patientProxy) {
+    public PatientController(PatientProxy patientProxy, NoteProxy noteProxy) {
         this.patientProxy = patientProxy;
+        this.noteProxy = noteProxy;
     }
 
     @RequestMapping("/")
     public String accueil(Model model){
          model.addAttribute("patients",patientProxy.getAllPatients());
-        return "/patient";
+        return "patientPage";
     }
-    @GetMapping("/patient-service/{id}")
+    @GetMapping("/patients/{id}")
     public String getPatient(@PathVariable Long id, Model model){
         model.addAttribute("patient",patientProxy.getPatient(id));
-        return "/patient";
+        return "patientPage";
+    }
+
+    @GetMapping("/patients/{id}/history")
+    public String getPatientHistory(@PathVariable Long id, Model model){
+        model.addAttribute("patient",patientProxy.getPatient(id));
+        model.addAttribute("notes",noteProxy.getNoteByPatientId(id));
+        return "patientPage";
     }
 
     /*@GetMapping("/pa/{id}")
