@@ -1,4 +1,4 @@
-package com.example.services.noteservice;
+package com.example.services.note;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
