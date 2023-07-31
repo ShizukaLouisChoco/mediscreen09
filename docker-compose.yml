@@ -41,7 +41,7 @@ services:
     links:
       - config-service
       - discovery-service
-      - ui-service
+      - ui-client
       - zipkin
     environment:
       SPRING_PROFILES_ACTIVE: docker
@@ -58,10 +58,10 @@ services:
       - config-service
       - discovery-service
       - patient-service
-      - ui-service
+      - ui-client
       - zipkin
-  ui-service:
-    image: example/ui-service:1.1-SNAPSHOT
+  ui-client:
+    image: example/ui-client:1.1-SNAPSHOT
     ports:
       - "9001"
     depends_on:
