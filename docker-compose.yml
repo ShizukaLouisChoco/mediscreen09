@@ -34,7 +34,7 @@ services:
   patient-service:
     image: example/patient-service:1.1-SNAPSHOT
     ports:
-      - "8080"
+      - "9000"
     depends_on:
       discovery-service:
         condition: service_healthy
