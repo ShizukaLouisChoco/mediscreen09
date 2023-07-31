@@ -104,7 +104,7 @@ public class PatientController {
         log.info("Accessed endpoint URL:/patient");
         log.debug("Request details: POSTMapping, Body patient :{}", patient);
         //model.addAttribute("patient", patient);
-        patientService.createPatient(patient);
-        return patient;
+        ;
+        return patientService.createPatient(patient);
     }
 }

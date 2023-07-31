@@ -64,19 +64,23 @@ public class PatientServiceImpl implements PatientService {
     @Override
     @Transactional
     public Patient createPatient(Patient patient) throws PatientErrorException {
-        boolean patientNameExists = patientRepository.findPatientsByFamilyAndGiven(patient.getFamily(),patient.getGiven()).isPresent();
-        if(patientNameExists){
-            throw new PatientErrorException("This patient : " + patient.getFamily() + patient.getGiven() + "is already registered");
+        if(patient.getId()!=null){
+        Optional<Patient> patientIdExists = patientRepository.findById(patient.getId());
+        if (patientIdExists.isPresent()){
+            throw  new PatientErrorException("this patient id : " + patient.getId() + "is already used. Please use different number or use null");
+        }}
+        List<Patient> patientList = patientRepository.findPatientsByFamilyAndGiven(patient.getFamily(),patient.getGiven()).get();
+        if(patientList.size()>0){
+            throw new PatientErrorException("This patient : " + patient.getFamily() + " " + patient.getGiven() + " is already registered");
         }
-        if(patient.getId()>=0){
-
+        if(patient.getId()!=null){
         Patient newPatientWithId = new Patient(patient.getId(),patient.getFamily(),patient.getGiven(),patient.getDob(),patient.getSex(),patient.getAddress(),patient.getPhone());
-        return patientRepository.save(newPatientWithId);
-
-        }
+        patientRepository.save(newPatientWithId);
+        }else{
         Patient newPatient = new Patient(null,patient.getFamily(),patient.getGiven(),patient.getDob(),patient.getSex(),patient.getAddress(),patient.getPhone());
-
-        return patientRepository.save(newPatient);
+        patientRepository.save(newPatient);
+        }
+        return getPatientByFamilyAndGiven(patient.getFamily(),patient.getGiven());
 
     }
 }
