@@ -16,16 +16,13 @@ public class NoteController {
     public NoteController(NoteService noteService) {
         this.noteService = noteService;
     }
-
-    @PostMapping("/notes")
-    public Note addNote(@RequestBody Note note) {
-        log.info("Add new note");
-        return noteService.addNote(note);
+    @GetMapping("/notes")
+    public List<Note> getAllNote() {
+        log.info("Get all note");
+        return noteService.getAllNote();
     }
-
-
     @GetMapping("/notes/{id}")
-    public Note getNoteById(@PathVariable Long id) {
+    public Note getNoteById(@PathVariable String id) {
         log.info("Get note with id = "+id);
         return noteService.getNoteById(id);
     }
@@ -36,20 +33,22 @@ public class NoteController {
         return noteService.getNoteByPatientId(id);
     }
 
-    @GetMapping("/notes")
-    public List<Note> getAllNote() {
-        log.info("Get all note");
-        return noteService.getAllNote();
-    }
-
     @PutMapping("/notes")
     public Note updateNote(@RequestBody Note note) {
         log.info("Update note with id = "+ note.getId());
         return noteService.updateNote(note);
     }
 
+    @PostMapping("/notes")
+    public Note addNote(@RequestBody Note note) {
+        log.info("Add new note");
+        return noteService.addNote(note);
+    }
+
+
+
     @DeleteMapping("/notes/{id}")
-    public void deleteNoteById(@PathVariable Long id) {
+    public void deleteNoteById(@PathVariable String id) {
         log.info("Delete note with id = "+id);
         noteService.deleteNoteById(id);
     }

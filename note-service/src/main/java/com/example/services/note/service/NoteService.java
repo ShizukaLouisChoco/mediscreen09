@@ -10,7 +10,7 @@ public interface NoteService {
     Note addNote(Note note);
 
     //READ
-    Note getNoteById(Long id);
+    Note getNoteById(String id);
 
     //READ BY PATIENT ID
     List<Note> getNoteByPatientId(Long id);
@@ -22,7 +22,7 @@ public interface NoteService {
     Note updateNote(Note note);
 
     //DELETE
-    void deleteNoteById(Long id);
+    void deleteNoteById(String id);
 
     void deleteNoteByPatientId(Long id);
 }

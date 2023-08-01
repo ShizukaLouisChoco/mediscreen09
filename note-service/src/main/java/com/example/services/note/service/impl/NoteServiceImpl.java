@@ -25,11 +25,22 @@ public class NoteServiceImpl implements NoteService{
 
     @Override
     public Note addNote(Note note) {
-        return noteRepository.save(note);
+        if(note.getId()!=null){
+            Optional<Note> patientIdExists = noteRepository.findById(note.getId());
+            if (patientIdExists.isPresent()){
+                throw  new NoteErrorException("this note id : " + note.getId() + "is already used. Please use different number or use null");
+            }
+        }else{
+            Note newNote = new Note(null,note.getPatientId(),note.getNote(),note.getDate());
+            noteRepository.save(newNote);
+        }
+
+        Note newNoteWithId = new Note(note.getId(),note.getPatientId(),note.getNote(),note.getDate());
+        return noteRepository.save(newNoteWithId);
     }
 
     @Override
-    public Note getNoteById(Long id) {
+    public Note getNoteById(String id) {
         Optional<Note> optionalNote = noteRepository.findById(id);
 
         if (optionalNote.isEmpty()) {
@@ -67,7 +78,7 @@ public class NoteServiceImpl implements NoteService{
     }
 
     @Override
-    public void deleteNoteById(Long id) {
+    public void deleteNoteById(String id) {
         Optional<Note> optionalNote = noteRepository.findById(id);
 
         if (optionalNote.isEmpty()) {

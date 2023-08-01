@@ -20,7 +20,7 @@ import java.time.LocalDate;
 public class Note {
 
     @Id
-    private Long id;
+    private String id;
 
     @NotNull
     private Long patientId;

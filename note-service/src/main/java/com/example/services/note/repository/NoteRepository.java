@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface NoteRepository extends MongoRepository<Note, Long> {
+public interface NoteRepository extends MongoRepository<Note, String> {
     List<Note> findAllByPatientIdOrderByDateDesc(Long id);
 
     void deleteNoteByPatientId(Long id);
