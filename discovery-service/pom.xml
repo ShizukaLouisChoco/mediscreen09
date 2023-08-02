@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.example.services</groupId>
+        <groupId>com.mediscreen.services</groupId>
         <artifactId>mediscreen09</artifactId>
         <version>1.1-SNAPSHOT</version>
     </parent>
@@ -60,7 +60,7 @@
                         <version>3.3.2</version>
                         <configuration>
                             <to>
-                                <image>example/${project.artifactId}:${project.version}</image>
+                                <image>mediscreen/${project.artifactId}:${project.version}</image>
                             </to>
                         </configuration>
                         <executions>
@@ -77,7 +77,7 @@
                     <!--						<artifactId>spring-boot-maven-plugin</artifactId>-->
                     <!--						<configuration>-->
                     <!--							<image>-->
-                    <!--								<name>example/${project.artifactId}:${project.version}</name>-->
+                    <!--								<name>mediscreen/${project.artifactId}:${project.version}</name>-->
                     <!--							</image>-->
                     <!--						</configuration>-->
                     <!--						<executions>-->
@@ -107,7 +107,7 @@
         <relativePath/> -->
         <!-- lookup parent from repository -->
     <!--</parent>
-    <groupId>com.example.services</groupId>
+    <groupId>com.mediscreen.services</groupId>
     <artifactId>discovery-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>eureka-server</name>

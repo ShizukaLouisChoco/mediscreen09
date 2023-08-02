@@ -1,62 +1,62 @@
 [
   {
-    "_class": "com.example.services.note.entity.Note",
+    "_class": "com.mediscreen.services.note.entity.Note",
     "id": 0,
     "patientId":1,
     "note" : "Patient: TestNone Practitioner's notes/recommendations: Patient states that they are 'feeling terrific' Weight at or below recommended level",
     "date": "2022-01-01"
   },
   {
-    "_class": "com.example.services.note.entity.Note",
+    "_class": "com.mediscreen.services.note.entity.Note",
     "id": 1,
     "patientId":2,
     "note" : "Patient: TestBorderline Practitioner's notes/recommendations: Patient states that they are feeling a great deal of stress at work Patient also complains that their hearing seems Abnormal as of late",
     "date": "2022-01-02"
   },
   {
-    "_class": "com.example.services.note.entity.Note",
+    "_class": "com.mediscreen.services.note.entity.Note",
     "id": 2,
     "patientId":2,
     "note" : "Patient: TestBorderline Practitioner's notes/recommendations: Patient states that they have had a Reaction to medication within last 3 months Patient also complains that their hearing continues to be problematic",
     "date": "2022-01-03"
   },
   {
-    "_class": "com.example.services.note.entity.Note",
+    "_class": "com.mediscreen.services.note.entity.Note",
     "id": 3,
     "patientId":3,
     "note" : "Patient: TestInDanger Practitioner's notes/recommendations: Patient states that they are short term Smoker",
     "date": "2022-01-04"
   },
   {
-    "_class": "com.example.services.note.entity.Note",
+    "_class": "com.mediscreen.services.note.entity.Note",
     "id": 4,
     "patientId":3,
     "note" : "Patient: TestInDanger Practitioner's notes/recommendations: Patient states that they quit within last year Patient also complains that of Abnormal breathing spells Lab reports Cholesterol LDL high",
     "date": "2022-01-05"
   },
   {
-    "_class": "com.example.services.note.entity.Note",
+    "_class": "com.mediscreen.services.note.entity.Note",
     "id": 5,
     "patientId":4,
     "note" : "Patient: TestEarlyOnset Practitioner's notes/recommendations: Patient states that walking up stairs has become difficult Patient also complains that they are having shortness of breath Lab results indicate Antibodies present elevated Reaction to medication",
     "date": "2022-01-06"
   },
   {
-    "_class": "com.example.services.note.entity.Note",
+    "_class": "com.mediscreen.services.note.entity.Note",
     "id": 6,
     "patientId":4,
     "note" : "Patient: TestEarlyOnset Practitioner's notes/recommendations: Patient states that they are experiencing back pain when seated for a long time",
     "date": "2022-01-07"
   },
   {
-    "_class": "com.example.services.note.entity.Note",
+    "_class": "com.mediscreen.services.note.entity.Note",
     "id": 7,
     "patientId":4,
     "note" : "Patient: TestEarlyOnset Practitioner's notes/recommendations: Patient states that they are a short term Smoker Hemoglobin A1C above recommended level",
     "date": "2022-01-08"
   },
   {
-    "_class": "com.example.services.note.entity.Note",
+    "_class": "com.mediscreen.services.note.entity.Note",
     "id": 8,
     "patientId":4,
     "note" : "Patient: TestEarlyOnset Practitioner's notes/recommendations: Patient states that Body Height, Body Weight, Cholesterol, Dizziness and Reaction",
