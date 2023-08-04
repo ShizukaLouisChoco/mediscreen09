@@ -25,7 +25,7 @@ public class PatientController {
      * url : http://localhost:8080/patients
      * @return list of all patients
      */
-    @GetMapping("/patients")
+    @GetMapping("/patients/all")
     public List<Patient> getAllPatients(){
         log.info(".getAllPatients");
         log.info("Accessed endpoint URL:/patients");
@@ -50,26 +50,40 @@ public class PatientController {
         //model.addAttribute("patient",patientService.getPatient(Long.valueOf(patientId)));
         return Optional.of(patientService.getPatient(id));
     }
+    /**
+     * GetMapping - Get patient
+     * url : http://localhost:8080/patients/{id}
+     * @return patient info with patientId
+     */
+    @GetMapping("/patients/{id}/history")
+    public Optional<Patient> getPatientAndHistory(@PathVariable Long id){
+        log.info(".getPatient");
+        log.info("Accessed endpoint URL:/patient/get");
+        log.debug("Request details: GETMapping");
+
+        //model.addAttribute("patient",patientService.getPatient(Long.valueOf(patientId)));
+        return Optional.of(patientService.getPatient(id));
+    }
 
     /**
      * GetMapping - Update an existing patient page
      * url : http://localhost:8080/patient/update/{patientId}
      * @return The form to update patient
      */
-    /*@GetMapping("/update/{patientId}")
-    public String updatePatientPage(@PathVariable("patientId") Long patientId, Model model) {
+    @GetMapping("/patients/update/{id}")
+    public Patient updatePatientPage(@PathVariable("id") Long id) {
         log.info(".updatePatientPage");
         log.info("Accessed endpoint URL:/patient/update/{patientId}");
-        model.addAttribute("patient", Optional.of(patientService.getPatient(patientId)).orElseThrow(()->new PatientErrorException("No patient with this id : "+patientId)));
-        return "/update";
-    }*/
+        //model.addAttribute("patient", Optional.of(patientService.getPatient(patientId)).orElseThrow(()->new PatientErrorException("No patient with this id : "+patientId)));
+        return patientService.getPatient(id);
+    }
 
     /**
      * PostMapping - Update an existing patient
      * url : http://localhost:8080/patient/update/{patientId}
      * @return The updated patient updated
      */
-    @PutMapping("/patients/{id}")
+    @PutMapping("/patients/update/{id}")
     public Patient updatePatient(@PathVariable Long id, @RequestBody Patient patient) throws PatientErrorException {
         log.info("heading to /patients/{id} post mapping");
         //model.addAttribute("patient",new Patient());
@@ -84,13 +98,12 @@ public class PatientController {
      * url : http://localhost:8080/patient/add
      * @return The saved patient object
      */
-    /*@GetMapping(value = "/add")
-    public String createPatientForm(Model model){
+    @GetMapping(value = "/add")
+    public Patient createPatientForm(){
         log.info(".createPerson");
         log.info("Accessed endpoint URL:/patient/add");
-        model.addAttribute("patient",new Patient());
-        return "/add";
-    }*/
+        return new Patient();
+    }
 
     /**
      * PostMapping - add a new patient
@@ -98,7 +111,7 @@ public class PatientController {
      * @param patient to add
      * @return The saved patient object
      */
-    @PostMapping(value = "/patients")
+    @PostMapping(value = "/patients/add")
     public Patient createPatient(@RequestBody Patient patient){
         log.info(".createPerson");
         log.info("Accessed endpoint URL:/patient");

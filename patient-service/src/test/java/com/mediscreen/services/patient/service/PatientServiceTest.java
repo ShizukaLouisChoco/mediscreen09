@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,6 +66,9 @@ public class PatientServiceTest {
     @Test
     public  void getPatientsTest(){
         //GIVEN
+        List<Patient> patientList = new ArrayList<>();
+        patientList.add(new Patient());
+        when(patientRepository.findAll()).thenReturn(patientList);
 
         //WHEN
         var result = patientService.getPatients();
@@ -103,6 +107,7 @@ public class PatientServiceTest {
         when(patientRepository.findById(any())).thenReturn(Optional.empty());
         when(patientRepository.findPatientsByFamilyAndGiven(any(),any())).thenReturn(Optional.empty());
         when(patientRepository.save(any())).thenAnswer(p -> p.getArguments()[0]);
+        when(patientRepository.findPatientByFamilyAndGiven(any(),any())).thenReturn(Optional.of(expectedPatient));
 
         Patient result = patientService.createPatient(expectedPatient);
 
@@ -128,7 +133,7 @@ public class PatientServiceTest {
             patientService.createPatient(registeredPatient);
         })
                 .isInstanceOf(PatientErrorException.class)
-                .hasMessageContaining("This patient : " + registeredPatient.getFamily() + registeredPatient.getGiven() + "is already registered");
+                .hasMessageContaining("This patient : " + registeredPatient.getFamily() + " " + registeredPatient.getGiven() + " is already registered");
     }
 
 }
