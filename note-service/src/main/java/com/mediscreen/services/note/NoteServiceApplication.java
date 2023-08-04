@@ -9,7 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 @EnableDiscoveryClient
 @OpenAPIDefinition(info =
-@Info(title = "Patient API", version = "1.1", description = "Documentation Patient API v1.1"))
+@Info(title = "Note API", version = "1.1", description = "Documentation Note API v1.1"))
 public class NoteServiceApplication {
 
 	public static void main(String[] args) {

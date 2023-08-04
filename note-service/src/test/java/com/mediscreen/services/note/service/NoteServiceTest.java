@@ -31,7 +31,7 @@ public class NoteServiceTest {
     @Test
     public void getNoteTest(){
         // GIVEN
-        final Note registeredNote = new Note(1L,1L,"Note1", LocalDate.of(1966,12,31));
+        final Note registeredNote = new Note("1",1L,"Note1", LocalDate.of(1966,12,31));
 
         // WHEN
         when(noteRepository.findById(any())).thenReturn(Optional.of(registeredNote));
@@ -48,7 +48,7 @@ public class NoteServiceTest {
     @Test
     public void getNoteWithExceptionTest(){
         // GIVEN
-        final Note registeredNote = new Note(1L,1L,"Note1", LocalDate.of(1966,12,31));
+        final Note registeredNote = new Note("1",1L,"Note1", LocalDate.of(1966,12,31));
 
         // WHEN
         when(noteRepository.findById(any())).thenReturn(Optional.empty());
@@ -75,8 +75,8 @@ public class NoteServiceTest {
     @Test
     public void updatePatientTest(){
         // GIVEN
-        final Note registeredNote = new Note(1L,1L,"Note1", LocalDate.of(1966,12,31));
-        final Note updateingNote = new Note(1L,1L,"UpdatedNote1", LocalDate.of(2002,12,31));
+        final Note registeredNote = new Note("1",1L,"Note1", LocalDate.of(1966,12,31));
+        final Note updateingNote = new Note("1",1L,"UpdatedNote1", LocalDate.of(2002,12,31));
 // WHEN
         when(noteRepository.findById(registeredNote.getId())).thenReturn(Optional.of(registeredNote));
         when(noteRepository.save(any(Note.class))).thenAnswer(r -> r.getArguments()[0]);
@@ -93,7 +93,7 @@ public class NoteServiceTest {
     @Test
     public void createNoteTest(){
         //GIVEN
-        final Note newNote = new Note(10L,1L,"Note1", LocalDate.of(1966,12,31));
+        final Note newNote = new Note("10",1L,"Note1", LocalDate.of(1966,12,31));
         when(noteRepository.save(any())).thenAnswer(p -> p.getArguments()[0]);
 
         //WHEN
@@ -110,7 +110,7 @@ public class NoteServiceTest {
     @Test
     public void deleteNoteTest(){
         //GIVEN
-        final Note registeredNote = new Note(10L,1L,"Note1", LocalDate.of(1966,12,31));
+        final Note registeredNote = new Note("10",1L,"Note1", LocalDate.of(1966,12,31));
         when(noteRepository.findById(registeredNote.getId())).thenReturn(Optional.of(registeredNote));
 
         //WHEN

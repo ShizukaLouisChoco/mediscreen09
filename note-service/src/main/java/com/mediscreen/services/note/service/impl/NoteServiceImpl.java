@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -25,18 +26,10 @@ public class NoteServiceImpl implements NoteService{
 
     @Override
     public Note addNote(Note note) {
-        if(note.getId()!=null){
-            Optional<Note> patientIdExists = noteRepository.findById(note.getId());
-            if (patientIdExists.isPresent()){
-                throw  new NoteErrorException("this note id : " + note.getId() + "is already used. Please use different number or use null");
-            }
-        }else{
-            Note newNote = new Note(null,note.getPatientId(),note.getNote(),note.getDate());
-            noteRepository.save(newNote);
-        }
+        Note newNote = new Note(UUID.randomUUID().toString(),note.getPatientId(),note.getNote(),note.getDate());
+        noteRepository.save(newNote);
 
-        Note newNoteWithId = new Note(note.getId(),note.getPatientId(),note.getNote(),note.getDate());
-        return noteRepository.save(newNoteWithId);
+        return noteRepository.save(newNote);
     }
 
     @Override
