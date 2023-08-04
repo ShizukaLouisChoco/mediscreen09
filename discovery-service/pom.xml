@@ -2,30 +2,41 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.mediscreen.services</groupId>
-        <artifactId>mediscreen09</artifactId>
-        <version>1.1-SNAPSHOT</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.1.1</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
+    <groupId>com.mediscreen.services</groupId>
     <artifactId>discovery-service</artifactId>
     <version>1.1-SNAPSHOT</version>
+    <name>discovery-service</name>
+    <description>discovery service</description>
 
     <properties>
-        <sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
+        <!--<sonar.moduleKey>${project.artifactId}</sonar.moduleKey>-->
+        <java.version>17</java.version>
+        <spring-cloud.version>2022.0.4</spring-cloud.version>
     </properties>
 
     <dependencies>
+<!--Spring cloud-->
+        <!--eureka server-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
-        <dependency>
+        <!--config-->
+        <!--<dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
-        </dependency>
-        <dependency>
+        </dependency>-->
+        <!--bootstrap.yml-->
+        <!--<dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
     <dependencyManagement>
