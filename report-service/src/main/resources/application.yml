@@ -12,3 +12,8 @@ eureka:
 
 #  config:
 #    import: "optional:configserver:http://localhost:8088"
+
+management:
+  zipkin:
+    tracing:
+      endpoint: http://${ZIPKIN_HOST:localhost}:9411/api/v2/spans
