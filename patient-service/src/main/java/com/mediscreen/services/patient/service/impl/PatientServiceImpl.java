@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -49,9 +48,9 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     @Transactional
-    public Patient updatePatient(Patient patient) {
-        Optional<Patient> patientInDataBase =patientRepository.findById(patient.getId());
-        Patient patientToUpdate = patientInDataBase.orElseThrow();
+    public Patient updatePatient(Long id, Patient patient) {
+        Patient patientToUpdate = patientRepository.findById(id).get();
+        //Patient patientToUpdate = patientInDataBase.orElseThrow();
         patientToUpdate.setFamily(patient.getFamily());
         patientToUpdate.setGiven(patient.getGiven());
         patientToUpdate.setDob(patient.getDob());
@@ -71,5 +70,10 @@ public class PatientServiceImpl implements PatientService {
         Patient newPatient = new Patient(null,patient.getFamily(),patient.getGiven(),patient.getDob(),patient.getSex(),patient.getAddress(),patient.getPhone());
         return patientRepository.save(newPatient);
 
+    }
+
+    @Override
+    public void deletePatient(Long id) {
+        patientRepository.deleteById(id);
     }
 }

@@ -3,9 +3,11 @@ package com.mediscreen.services.clientui.beans;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDate;
 
+@Validated
 public class PatientBean {
 
     private Long id;

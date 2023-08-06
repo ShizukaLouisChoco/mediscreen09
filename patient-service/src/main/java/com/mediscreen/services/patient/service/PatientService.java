@@ -16,8 +16,11 @@ public interface PatientService {
     List<Patient> getPatients();
 
     @Transactional
-    Patient updatePatient(Patient patient);
+    Patient updatePatient(Long id, Patient patient);
 
     @Transactional
     Patient createPatient(Patient patient) throws PatientErrorException;
+
+    @Transactional
+    void deletePatient(Long id);
 }

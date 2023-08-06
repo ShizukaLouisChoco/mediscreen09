@@ -12,20 +12,15 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<!--contents-->
+<!--contents patientsAdd.html-->
 <section>
     <form action="#" th:action="@{/patients}" method="post" style="width: 100%">
         <div th:object="${patient}">
             <div class="row my-4 justify-content-center">
-                <!--<div class="row my-4 justify-content-center hidden" >
-                    <div class="col-3">
-                        <label for="id" class="col-form-label ">Patient's id</label>
-                    </div>
-                    <div class="col-3">
-                        <span th:text="*{id}"></span>
-                        <input type="hidden" th:field="*{id}" id="id" th:value="*{id}"/>
-                    </div>
-                </div>-->
+            <!--exception handling-->
+            <div class="alert alert-danger" th:if="${errorMsg}" th:class="${errorMsg}? 'alert alert-danger':''" role="alert">
+                <p th:text="${errorMsg}"></p>
+            </div>
                 <div class="row my-4 justify-content-center">
                     <div class="col-3">
                         <label for="family" class="col-form-label ">Family name</label>
@@ -33,6 +28,12 @@
                     <div class="col-3">
                         <input type="text" th:field="*{family}" id="family" placeholder="Family name here"/>
                     </div>
+                    <!--validation error-->
+                    <div class="row">
+                        <p th:if="${#fields.hasErrors('family')}" th:class="${#fields.hasErrors('family')}? 'text-danger'"
+                           th:errorclass="error" th:errors="*{family}"></p>
+                    </div>
+
                 </div>
                 <div class="row my-4 justify-content-center">
                     <div class="col-3 ">
@@ -41,6 +42,12 @@
                     <div class="col-3 ">
                         <input type="text" th:field="*{given}" id="given" placeholder="Given name here"/>
                     </div>
+                    <!--validation error-->
+                    <div class="row">
+                        <p th:if="${#fields.hasErrors('given')}" th:class="${#fields.hasErrors('given')}? 'text-danger'"
+                           th:errorclass="error" th:errors="*{given}"></p>
+                    </div>
+
                 </div>
                 <div class="row my-4 justify-content-center">
                     <div class="col-3 ">
@@ -49,6 +56,12 @@
                     <div class="col-3 ">
                         <input type="date" id="dob" name="dob" th:field="*{dob}">
                     </div>
+                    <!--validation error-->
+                    <div class="row">
+                        <p th:if="${#fields.hasErrors('dob')}" th:class="${#fields.hasErrors('dob')}? 'text-danger'"
+                           th:errorclass="error" th:errors="*{dob}"></p>
+                    </div>
+
                 </div>
                 <div class="row my-4 justify-content-center">
                     <div class="col-3 ">
@@ -60,6 +73,12 @@
                             <option value="F">Female</option>
                         </select>
                     </div>
+                    <!--validation error-->
+                    <div class="row">
+                        <p th:if="${#fields.hasErrors('sex')}" th:class="${#fields.hasErrors('sex')}? 'text-danger'"
+                           th:errorclass="error" th:errors="*{sex}"></p>
+                    </div>
+
                 </div>
                 <div class="row my-4 justify-content-center">
                     <div class="col-3">
@@ -68,6 +87,12 @@
                     <div class="col-3">
                         <input type="text" th:field="*{address}" id="address" placeholder="Address here"/>
                     </div>
+                    <!--validation error-->
+                    <div class="row">
+                        <p th:if="${#fields.hasErrors('address')}" th:class="${#fields.hasErrors('address')}? 'text-danger'"
+                           th:errorclass="error" th:errors="*{address}"></p>
+                    </div>
+
                 </div>
 
                 <div class="row my-4 justify-content-center">
@@ -77,6 +102,12 @@
                     <div class="col-3">
                         <input type="text" th:field="*{phone}" id="phone" placeholder="phone here"/>
                     </div>
+                    <!--validation error-->
+                    <div class="row">
+                        <p th:if="${#fields.hasErrors('phone')}" th:class="${#fields.hasErrors('phone')}? 'text-danger'"
+                           th:errorclass="error" th:errors="*{phone}"></p>
+                    </div>
+
                 </div>
 
                 <div class="row ">

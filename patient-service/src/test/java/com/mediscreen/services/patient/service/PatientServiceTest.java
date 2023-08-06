@@ -88,7 +88,7 @@ public class PatientServiceTest {
         when(patientRepository.findById(registeredPatient.getId())).thenReturn(Optional.of(registeredPatient));
         when(patientRepository.save(any(Patient.class))).thenAnswer(r -> r.getArguments()[0]);
 
-        var result = patientService.updatePatient(expectedPatient);
+        var result = patientService.updatePatient(expectedPatient.getId(), expectedPatient);
 
         // THEN
         verify(patientRepository,times(1)).save(any(Patient.class));
