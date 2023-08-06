@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Spring Boot</title>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" >
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <a href="/patients">Patient List</a>&nbsp;|&nbsp;
+            <a href="/notes">Note List</a>
+        </div>
+    </div>
+    <h3>Error</h3>
+    <div class="row">
+        <p class="error" th:text="${errorStatus}">Error</p>
+    </div>
+    <!--exception handling-->
+    <div class="row">
+        <div class="alert alert-danger" th:if="${errorMsg}" th:class="${errorMsg}? 'alert alert-danger':''" role="alert">
+            <p th:text="${errorMsg}"></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
