@@ -57,8 +57,8 @@ public class NoteServiceImpl implements NoteService{
     }
 
     @Override
-    public Note updateNote(Note note) {
-        Optional<Note> optionalNote = noteRepository.findById(note.getId());
+    public Note updateNote(String id, Note note) {
+        Optional<Note> optionalNote = noteRepository.findById(id);
 
         if (optionalNote.isEmpty()) {
             log.info("Note with this id = " + note.getId() + " not found");

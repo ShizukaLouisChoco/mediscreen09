@@ -3,9 +3,13 @@ package com.mediscreen.services.clientui.beans;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.validation.annotation.Validated;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class NoteBean {
+@Validated
+public class NoteBean implements Serializable {
     private String id;
 
     @NotNull

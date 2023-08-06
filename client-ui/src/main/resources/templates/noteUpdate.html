@@ -12,9 +12,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<!--contents-->
+<!--contents noteUpdate.html-->
 <section>
-    <form action="#" th:action="@{/notes}" method="put" style="width: 100%">
+    <!--exception handling-->
+    <div class="alert alert-danger" th:if="${errorMsg}" th:class="${errorMsg}? 'alert alert-danger':''" role="alert">
+        <p th:text="${errorMsg}"></p>
+    </div>
+    <form th:action="@{/notes/update/{id}(id=${note.id})}" method="post" style="width: 100%">
         <div th:object="${note}">
             <div class="row my-4 justify-content-center">
                 <div class="row my-4 justify-content-center">
@@ -33,6 +37,12 @@
                     <div class="col-3">
                         <input type="text" th:field="*{patientId}" id="patientId" placeholder="Patient id here"/>
                     </div>
+                    <!--validation error-->
+                    <div class="row">
+                        <p th:if="${#fields.hasErrors('patientId')}" th:class="${#fields.hasErrors('patientId')}? 'text-danger'"
+                           th:errorclass="error" th:errors="*{patientId}"></p>
+                    </div>
+
                 </div>
                 <div class="row my-4 justify-content-center">
                     <div class="col-3 ">
@@ -41,6 +51,12 @@
                     <div class="col-3 ">
                         <input type="date" id="date" name="date" th:field="*{date}"  th:value="*{date}" />
                     </div>
+                    <!--validation error-->
+                    <div class="row">
+                        <p th:if="${#fields.hasErrors('date')}" th:class="${#fields.hasErrors('date')}? 'text-danger'"
+                           th:errorclass="error" th:errors="*{date}"></p>
+                    </div>
+
                 </div>
                 <div class="row my-4 justify-content-center">
                     <div class="col-3">
@@ -49,6 +65,12 @@
                     <div class="col-3">
                         <input type="text" th:field="*{note}" id="note" placeholder="Note here"/>
                     </div>
+                    <!--validation error-->
+                    <div class="row">
+                        <p th:if="${#fields.hasErrors('note')}" th:class="${#fields.hasErrors('note')}? 'text-danger'"
+                           th:errorclass="error" th:errors="*{note}"></p>
+                    </div>
+
                 </div>
 
                 <div class="row ">

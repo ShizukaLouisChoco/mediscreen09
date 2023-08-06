@@ -1,14 +1,27 @@
 package com.mediscreen.services.clientui.proxy;
 
 import com.mediscreen.services.clientui.beans.NoteBean;
+import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "note-service")
-//@LoadBalancerClient(name = "note-service")
+@FeignClient(name = "note-service", url = "localhost:9100")
+@LoadBalancerClient(name = "note-service")
 public interface NoteProxy {
+
+    //CREATE
+    @PostMapping(value = "/notes")
+    NoteBean addNote(@RequestBody NoteBean note);
+
+    //CREATE FORM
+    @GetMapping(value ="/notes/add")
+    NoteBean addNoteForm();
+
+    //READ ALL
+    @GetMapping("/notes")
+    List<NoteBean> getAllNote();
 
     //READ
     @GetMapping("/notes/{id}")
@@ -18,28 +31,21 @@ public interface NoteProxy {
     @GetMapping("/notes/patients/{patientId}")
     List<NoteBean> getNoteByPatientId(@PathVariable("patientId") Long patientId);
 
-    //READ ALL
-    @GetMapping("/notes/all")
-    List<NoteBean> getAllNote();
 
     //UPDATE
-    @PutMapping("/notes")
-    NoteBean updateNote (@RequestBody NoteBean noteBean);
+    @PutMapping("/notes/{id}")
+    NoteBean updateNote (@PathVariable String id, @RequestBody NoteBean noteBean);
 
+    //UPDATE FORM
     @GetMapping("/notes/update/{id}")
-    NoteBean updateNotePage (@PathVariable String  id);
+    NoteBean updateNoteForm (@PathVariable String  id);
 
     //DELETE
-    @DeleteMapping("/notes/{id}")
+    @GetMapping("/notes/delete/{id}")
     void deleteNoteById(@PathVariable String id);
 
-    @DeleteMapping("/notes/patients/{patientId}")
+    @GetMapping("/notes/patients/delete/{patientId}")
     void deleteNoteByPatientId(@PathVariable Long patientId);
 
-    //CREATE
-    @PostMapping(value = "/notes")
-    NoteBean addNote(@RequestBody NoteBean note);
 
-    @GetMapping(value ="/notes/add")
-    NoteBean addNoteForm();
 }

@@ -19,7 +19,7 @@ public interface NoteService {
     List<Note> getAllNote();
 
     //UPDATE
-    Note updateNote(Note note);
+    Note updateNote(String id, Note note);
 
     //DELETE
     void deleteNoteById(String id);

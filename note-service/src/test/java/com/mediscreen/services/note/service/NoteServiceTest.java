@@ -81,7 +81,7 @@ public class NoteServiceTest {
         when(noteRepository.findById(registeredNote.getId())).thenReturn(Optional.of(registeredNote));
         when(noteRepository.save(any(Note.class))).thenAnswer(r -> r.getArguments()[0]);
 
-        var result = noteService.updateNote(updateingNote);
+        var result = noteService.updateNote(updateingNote.getId(),updateingNote);
 
         // THEN
         verify(noteRepository,times(1)).save(any(Note.class));
