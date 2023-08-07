@@ -27,20 +27,24 @@ public class PatientController {
     @PostMapping(value = "/patients")
     public String createPatient(@Valid PatientBean patient, Model model, BindingResult result){
         log.info("postmapping /patients/add for createPatient()");
+
         model.addAttribute("patient", patient);
         if(result.hasErrors()){
            log.info("validation error");
-            return "redirect:/patients/add";
-        }try{
+           return "patientAdd";
+        }
+
+        try{
             log.info("creating user");
             patientProxy.createPatient(patient);
         }catch(Exception exception){
             model.addAttribute("patient", patient);
-            log.error(String.valueOf(exception));
+            log.error(exception.getMessage());
             model.addAttribute("errorMsg", exception.getMessage());
             return "patientAdd";
         }
         log.info("patient is created");
+
         return "redirect:/patients";
 
     }
@@ -82,11 +86,12 @@ public class PatientController {
 
     //UPDATE
     @PostMapping(value ="/patients/update/{id}")
-    public String updatePatient(@PathVariable("id") Long id, @Valid PatientBean patient, Model model, BindingResult result) {
+    public String updatePatient(@PathVariable("id") Long id, @Valid @ModelAttribute("patient") PatientBean patient, BindingResult result, Model model) {
         log.info("postmapping /patients for updatePatient()");
-        model.addAttribute("patient",patient);
+        model.addAttribute("patient", patient);
+
         if(result.hasErrors()){
-            log.info("validation error");
+            log.info("validation error : " + result.getAllErrors());
             return "patientUpdate";
         }try {
             log.info("updating patient");
@@ -98,7 +103,7 @@ public class PatientController {
             return "patientUpdate";
         }
         log.info("patient is updated");
-        return "redirect:/patients/" + patient.getId();
+        return "redirect:/patients/" + id;
     }
 
     //UPDATE FORM
