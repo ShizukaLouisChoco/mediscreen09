@@ -25,7 +25,7 @@ public class PatientController {
 
     //CREATE
     @PostMapping(value = "/patients")
-    public String createPatient(@Valid PatientBean patient, Model model, BindingResult result){
+    public String createPatient(@Valid @ModelAttribute("patient") PatientBean patient, BindingResult result, Model model){
         log.info("postmapping /patients/add for createPatient()");
 
         model.addAttribute("patient", patient);

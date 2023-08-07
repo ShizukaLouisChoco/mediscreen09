@@ -26,7 +26,7 @@ public class NoteController {
 
     //CREATE
     @PostMapping("/notes")
-    public String addNote(@Valid NoteBean note, BindingResult result, Model model) throws Exception {
+    public String addNote(@Valid @ModelAttribute("note") NoteBean note, BindingResult result, Model model) throws Exception {
         log.info("postmapping /notes for addNote()");
         model.addAttribute("note", note);
         if(result.hasErrors()) {
@@ -100,7 +100,7 @@ public class NoteController {
 
     //UPDATE
     @PostMapping("/notes/update/{id}")
-    public String updateNote(@PathVariable String id, @Valid NoteBean note, BindingResult result, Model model) throws NoteErrorException{
+    public String updateNote(@PathVariable String id, @Valid @ModelAttribute("note") NoteBean note, BindingResult result, Model model) throws NoteErrorException{
         log.info("putmapping /notes/update for updateNote()");
         model.addAttribute("note",note);
         if(result.hasErrors()){

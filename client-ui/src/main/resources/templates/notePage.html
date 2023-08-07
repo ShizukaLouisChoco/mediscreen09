@@ -10,28 +10,68 @@
 </head>
 <body>
 <!--contents notePage.html-->
-<section>
+<section th:if="${note}">
     <div class="container text-center p-5">
         <div class="row mb-2">
             <div class="col">
-                <div th:if="${note}">
-                    <h1>Patient information</h1>
-                    <p>Id : <span th:text="${note.id}"></span></p>
-                    <p>PatientId : <span th:text="${note.patientId}"></span></p>
-                    <p>Date : <span th:text="${note.date}"></span></p>
-                    <p>Note : <span th:text="${note.note}"></span></p>
-                    <button><a th:href="@{/notes/{id}(id=${note.id})}">Update</a></button>
+                <div >
+                    <div class="row my-2 justify-content-center">
+                        <h1>Patient information</h1>
+                    </div>
+                    <!--id-->
+                    <div class="row my-2 justify-content-center">
+                        <div class="col-3">
+                            <p>Id : </p>
+                        </div>
+                        <div class="col-3">
+                            <span th:text="${note.id}"></span>
+                        </div>
+                    </div>
+                    <!--patient id-->
+                    <div class="row my-2 justify-content-center">
+                        <div class="col-3">
+                            <p>PatientId : </p>
+                        </div>
+                        <div class="col-3">
+                            <span th:text="${note.patientId}"></span>
+                        </div>
+                    </div>
+                    <!--date-->
+                    <div class="row my-2 justify-content-center">
+                        <div class="col-3">
+                            <p>Date : </p>
+                        </div>
+                        <div class="col-3">
+                            <span th:text="${note.date}"></span>
+                        </div>
+                    </div>
+                    <!--note-->
+                    <div class="row my-2 justify-content-center">
+                        <div class="col-3">
+                            <p>Note : </p>
+                        </div>
+                        <div class="col-3">
+                            <span th:text="${note.note}"></span>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-4 offset-4">
+                            <button class="btn btn-primary text-white" ><a style="text-decoration:none; color:white;" th:href="@{/notes/{id}(id=${note.id})}">Update</a></button>
+                            <button class="btn btn-danger text-white" ><a style="text-decoration:none; color:white;" th:href="@{/notes/delete/{id}(id=${note.id})}">Delete</a></button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 <!--contents for Notes-->
-<section>
+<section th:if="${notes}">
     <div class="container text-center p-5">
         <div class="row mb-2">
             <div class="col">
-                <div th:if="${notes}">
+                <div >
                     <h1>All Notes information</h1>
                     <table class="table table-striped text-center">
                         <thead class="bg-success text-white font-weight-normal">
@@ -52,8 +92,9 @@
                             <td th:text="${note.patientId}"></td>
                             <td th:text="${note.date}"></td>
                             <td th:text="${note.note}"></td>
-                            <td><button><a th:href="@{/notes/update/{id}(id=${note.id})}">Update</a></button>
-                                <button><a th:href="@{/notes/delete/{id}(id=${note.id})}">Delete</a></button></td>
+                            <td>
+                                <button class="btn btn-primary text-white" ><a style="text-decoration:none; color:white;" th:href="@{/notes/update/{id}(id=${note.id})}">Update</a></button>
+                                <button class="btn btn-danger text-white" ><a style="text-decoration:none; color:white;"  th:href="@{/notes/delete/{id}(id=${note.id})}">Delete</a></button></td>
 
                         </tr>
                         </tbody>

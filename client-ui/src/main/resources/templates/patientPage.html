@@ -10,25 +10,94 @@
 </head>
 <body>
 <!--contents patientPage.html-->
-<section>
+<section th:if="${patient}">
     <div class="container text-center p-5">
         <div class="row mb-2">
             <div class="col">
-                <div th:if="${patient}">
-                    <h1>Patient information</h1>
-                    <p>Id : <span th:text="${patient.id}"></span></p>
-                    <p>Family name : <span th:text="${patient.family}"></span></p>
-                    <p>Given name : <span th:text="${patient.given}"></span></p>
-                    <p>Date of birth : <span th:text="${patient.dob}"></span></p>
-                    <p>Gender : <span th:text="${patient.sex}"></span></p>
-                    <p>Address : <span th:text="${patient.address}"></span></p>
-                    <p>Phone number : <span th:text="${patient.phone}"></span></p>
-                    <button><a th:href="@{/patients/update/{patientId}(patientId=${patient.id})}">Update</a></button>
+                <div >
+                    <div class="row my-2 justify-content-center">
+                        <h1>Patient information</h1>
+                    </div>
+                    <!--id-->
+                    <div class="row my-2 justify-content-center">
+                        <div class="col-3">
+                            <p>Id : </p>
+                        </div>
+                        <div class="col-3">
+                            <span th:text="${patient.id}"></span>
+                        </div>
+                    </div>
+                    <!--family name-->
+                    <div class="row my-2 justify-content-center">
+                        <div class="col-3">
+                            <p>Family name : </p>
+                        </div>
+                        <div class="col-3">
+                            <span th:text="${patient.family}"></span>
+                        </div>
+                    </div>
+                    <!--Given name-->
+                    <div class="row my-2 justify-content-center">
+                        <div class="col-3">
+                            <p>Given name : </p>
+                        </div>
+                        <div class="col-3">
+                            <span th:text="${patient.given}"></span>
+                        </div>
+                    </div>
+                    <!--Date of birth-->
+                    <div class="row my-2 justify-content-center">
+                        <div class="col-3">
+                            <p>Date of birth : </p>
+                        </div>
+                        <div class="col-3">
+                            <span th:text="${patient.dob}"></span>
+                        </div>
+                    </div>
+                    <!--Gender-->
+                    <div class="row my-2 justify-content-center">
+                        <div class="col-3">
+                            <p>Gender : </p>
+                        </div>
+                        <div class="col-3">
+                            <span th:text="${patient.sex}"></span>
+                        </div>
+                    </div>
+                    <!--Address-->
+                    <div class="row my-2 justify-content-center">
+                        <div class="col-3">
+                            <p>Address : </p>
+                        </div>
+                        <div class="col-3">
+                            <span th:text="${patient.address}"></span>
+                        </div>
+                    </div>
+                    <!--Phone number-->
+                    <div class="row my-2 justify-content-center">
+                        <div class="col-3">
+                            <p>Phone number : </p>
+                        </div>
+                        <div class="col-3">
+                            <span th:text="${patient.phone}"></span>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-4 offset-4">
+                            <button class="btn btn-primary text-white" ><a style="text-decoration:none; color:white;" th:href="@{/patients/update/{patientId}(patientId=${patient.id})}">Update</a></button>
+                            <button class="btn btn-danger text-white" ><a style="text-decoration:none; color:white;"  th:href="@{/patients/delete/{patientId}(patientId=${patient.id})}">Delete</a></button>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+<section th:if="${notes}">
+    <div class="container text-center p-5">
+        <div class="row mb-2">
             <div class="col">
-                <div th:if="${notes}">
-                    <h1>Patients all notes</h1>
+                <div >
+                    <h1>Patient's all notes</h1>
                     <table class="table table-striped text-center">
                         <thead class="bg-success text-white font-weight-normal">
                         <tr>
@@ -41,13 +110,16 @@
                         </thead>
                         <tbody>
                         <tr th:if="${notes.isEmpty()}">
-                            <td colspan="3">No patients</td>
+                            <td colspan="4">No notes</td>
                         </tr>
                         <tr th:each="note, iterstat : ${notes}" th:class="${iterstat.odd}?'odd'">
                             <td th:text="${note.id}"></td>
                             <td th:text="${note.date}"></td>
                             <td th:text="${note.note}"></td>
-                            <td><button><a th:href="@{/notes/{id}(id=${note.id})}">Update</a></button></td>
+                            <td>
+                                <button class="btn btn-primary text-white" ><a style="text-decoration:none; color:white;" th:href="@{/notes/{id}(id=${note.id})}">Update</a></button>
+                                <button class="btn btn-danger text-white" ><a style="text-decoration:none; color:white;" th:href="@{/notes/delete/{id}(id=${note.id})}">Delete</a></button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -57,11 +129,11 @@
     </div>
 </section>
 <!--contents for patients-->
-<section>
+<section th:if="${patients}">
     <div class="container text-center p-5">
         <div class="row mb-2">
             <div class="col">
-                <div th:if="${patients}">
+                <div >
                     <h1>All Patients information</h1>
                     <table class="table table-striped text-center">
                         <thead class="bg-success text-white font-weight-normal">
@@ -74,7 +146,6 @@
                             <th scope="col">Adresse</th>
                             <th scope="col">Numéro de téléphone</th>
                             <th scope="col">Action</th>
-
                         </tr>
                         </thead>
                         <tbody>
@@ -89,7 +160,10 @@
                             <td th:text="${patient.sex}"></td>
                             <td th:text="${patient.address}"></td>
                             <td th:text="${patient.phone}"></td>
-                            <td><button><a th:href="@{/patients/update/{patientId}(patientId=${patient.id})}">Update</a></button></td>
+                            <td>
+                                <button class="btn btn-primary text-white " ><a style="text-decoration:none; color:white;" th:href="@{/patients/update/{patientId}(patientId=${patient.id})}">Update</a></button>
+                                <button class="btn btn-danger text-white" ><a style="text-decoration:none; color:white;"  th:href="@{/patients/delete/{patientId}(patientId=${patient.id})}">Delete</a></button>
+                            </td>
 
                         </tr>
                         </tbody>
