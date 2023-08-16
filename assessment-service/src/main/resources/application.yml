@@ -1,6 +1,6 @@
 spring:
   application:
-    name: report-service
+    name: assessment-service
 
 server:
   port: 9200
