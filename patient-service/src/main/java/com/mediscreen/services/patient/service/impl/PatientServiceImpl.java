@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -63,17 +64,22 @@ public class PatientServiceImpl implements PatientService {
     @Override
     @Transactional
     public Patient createPatient(Patient patient) throws PatientErrorException {
-        List<Patient> patientNameExistsList = patientRepository.findPatientsByFamilyAndGiven(patient.getFamily(),patient.getGiven()).get();
-        if(patientNameExistsList.size()>0){
+        Optional<List<Patient>> patientNameExistsList = patientRepository.findPatientsByFamilyAndGiven(patient.getFamily(),patient.getGiven());
+        if(patientNameExistsList.isPresent() && patientNameExistsList.get().size() > 0){
             throw new PatientErrorException("This patient : " + patient.getFamily() + " " + patient.getGiven() + " is already registered");
         }
         Patient newPatient = new Patient(null,patient.getFamily(),patient.getGiven(),patient.getDob(),patient.getSex(),patient.getAddress(),patient.getPhone());
         return patientRepository.save(newPatient);
-
     }
 
     @Override
     public void deletePatient(Long id) {
         patientRepository.deleteById(id);
+    }
+
+    @Override
+    public Patient getPatientByFamily(String family) {
+        return patientRepository.findPatientByFamily(family)
+                .orElseThrow(()->new PatientErrorException("Patient not found with this name : " + family));
     }
 }

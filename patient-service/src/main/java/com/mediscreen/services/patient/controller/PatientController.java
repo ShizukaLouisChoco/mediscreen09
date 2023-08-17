@@ -79,6 +79,20 @@ public class PatientController {
      * url : http://localhost:8080/patients/{id}
      * @return patient info with patientId
      */
+    @GetMapping("/patients/family/{family}")
+    public Optional<Patient> getPatientByFamily(@PathVariable String family){
+        log.info(".getPatient");
+        log.info("Accessed endpoint URL:/patient/{family}");
+        log.debug("Request details: GETMapping");
+
+        return Optional.of(patientService.getPatientByFamily(family));
+    }
+
+    /**
+     * GetMapping - Get patient
+     * url : http://localhost:8080/patients/{id}
+     * @return patient info with patientId
+     */
     @GetMapping("/patients/{id}/history")
     public Optional<Patient> getPatientAndHistory(@PathVariable Long id){
         log.info(".getPatient");

@@ -23,4 +23,6 @@ public interface PatientService {
 
     @Transactional
     void deletePatient(Long id);
+
+    Patient getPatientByFamily(String family);
 }
