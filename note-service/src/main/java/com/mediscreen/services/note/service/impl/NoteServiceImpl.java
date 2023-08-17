@@ -27,8 +27,6 @@ public class NoteServiceImpl implements NoteService{
     @Override
     public Note addNote(Note note) {
         Note newNote = new Note(UUID.randomUUID().toString(),note.getPatientId(),note.getNote(),note.getDate());
-        noteRepository.save(newNote);
-
         return noteRepository.save(newNote);
     }
 
