@@ -3,63 +3,266 @@
     "_class": "com.mediscreen.services.note.entity.Note",
     "id": 0,
     "patientId":1,
-    "note" : "Patient: TestNone Practitioner's notes/recommendations: Patient states that they are 'feeling terrific' Weight at or below recommended level",
+    "note" : "Patient: TestNone Practitioner's notes/recommendations: Le patient déclare qu'il se sent « en pleine forme »\nPoids égal ou inférieur au niveau recommandé",
     "date": "2022-01-01"
   },
   {
     "_class": "com.mediscreen.services.note.entity.Note",
     "id": 1,
     "patientId":2,
-    "note" : "Patient: TestBorderline Practitioner's notes/recommendations: Patient states that they are feeling a great deal of stress at work Patient also complains that their hearing seems Abnormal as of late",
+    "note" : "Patient: TestBorderline Practitioner's notes/recommendations: Le patient déclare ressentir beaucoup de stress au travail\nLe patient se plaint également que son ouïe semble anormale ces derniers temps",
     "date": "2022-01-02"
   },
   {
     "_class": "com.mediscreen.services.note.entity.Note",
     "id": 2,
     "patientId":2,
-    "note" : "Patient: TestBorderline Practitioner's notes/recommendations: Patient states that they have had a Reaction to medication within last 3 months Patient also complains that their hearing continues to be problematic",
+    "note" : "Patient: TestBorderline Practitioner's notes/recommendations: Le patient déclare avoir eu une réaction à un médicament au cours des 3 derniers mois. Le patient se plaint également que son audition continue à poser problème",
     "date": "2022-01-03"
   },
   {
     "_class": "com.mediscreen.services.note.entity.Note",
     "id": 3,
     "patientId":3,
-    "note" : "Patient: TestInDanger Practitioner's notes/recommendations: Patient states that they are short term Smoker",
+    "note" : "Patient: TestInDanger Practitioner's notes/recommendations: Le patient déclare être fumeur à court terme",
     "date": "2022-01-04"
   },
   {
     "_class": "com.mediscreen.services.note.entity.Note",
     "id": 4,
     "patientId":3,
-    "note" : "Patient: TestInDanger Practitioner's notes/recommendations: Patient states that they quit within last year Patient also complains that of Abnormal breathing spells Lab reports Cholesterol LDL high",
+    "note" : "Patient: TestInDanger Practitioner's notes/recommendations: Le patient déclare avoir arrêté de fumer au cours de la dernière année\nLe patient se plaint également de périodes de respiration anormale\nLes rapports de laboratoire indiquent un taux élevé de cholestérol LDL",
     "date": "2022-01-05"
   },
   {
     "_class": "com.mediscreen.services.note.entity.Note",
     "id": 5,
     "patientId":4,
-    "note" : "Patient: TestEarlyOnset Practitioner's notes/recommendations: Patient states that walking up stairs has become difficult Patient also complains that they are having shortness of breath Lab results indicate Antibodies present elevated Reaction to medication",
+    "note" : "Patient: TestEarlyOnset Practitioner's notes/recommendations: Le patient déclare avoir des difficultés à monter les escaliers\nLe patient se plaint également d'avoir des essoufflements\nLes résultats de laboratoire indiquent la présence d'anticorps élevés en réaction à un médicament",
     "date": "2022-01-06"
   },
   {
     "_class": "com.mediscreen.services.note.entity.Note",
     "id": 6,
     "patientId":4,
-    "note" : "Patient: TestEarlyOnset Practitioner's notes/recommendations: Patient states that they are experiencing back pain when seated for a long time",
+    "note" : "Patient: TestEarlyOnset Practitioner's notes/recommendations: Le patient déclare ressentir des douleurs au dos lorsqu'il reste assis pendant une longue période",
     "date": "2022-01-07"
   },
   {
     "_class": "com.mediscreen.services.note.entity.Note",
     "id": 7,
     "patientId":4,
-    "note" : "Patient: TestEarlyOnset Practitioner's notes/recommendations: Patient states that they are a short term Smoker Hemoglobin A1C above recommended level",
+    "note" : "Patient: TestEarlyOnset Practitioner's notes/recommendations: Le patient déclare être un fumeur à court terme. L'Hémoglobine A1C est supérieure au niveau recommandé",
     "date": "2022-01-08"
   },
   {
     "_class": "com.mediscreen.services.note.entity.Note",
     "id": 8,
     "patientId":4,
-    "note" : "Patient: TestEarlyOnset Practitioner's notes/recommendations: Patient states that Body Height, Body Weight, Cholesterol, Dizziness and Reaction",
+    "note" : "Patient: TestEarlyOnset Practitioner's notes/recommendations: Le patient déclare la taille du corps, le poids du corps, le cholestérol, les vertiges et les réactions",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 9,
+    "patientId":5,
+    "note" : "Patient: Ferguson Practitioner's notes/recommendations: Le patient déclare qu'il \u00AB se sent très bien \u00BB \nPoids égal ou inférieur au poids recommandé",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 10,
+    "patientId":5,
+    "note" : "Patient: Ferguson Practitioner's notes/recommendations: Le patient déclare qu'il se sent fatigué pendant la journée\nIl se plaint également de douleurs musculaires\nTests de laboratoire indiquant une microalbumine élevée",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 11,
+    "patientId":5,
+    "note" : "Patient: Ferguson Practitioner's notes/recommendations: Le patient déclare qu'il ressent beaucoup de stress au travail\nIl se plaint également que son audition est anormale dernièrement",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 12,
+    "patientId":6,
+    "note" : "Patient: Rees Practitioner's notes/recommendations: Le patient déclare qu'il ressent beaucoup de stress au travail\nIl se plaint également que son audition est anormale dernièrement",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 13,
+    "patientId":6,
+    "note" : "Patient: Rees Practitioner's notes/recommendations: Le patient déclare avoir fait une réaction aux médicaments au cours des 3 derniers mois\nIl remarque également que son audition continue d'être anormale",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 14,
+    "patientId":6,
+    "note" : "Patient: Rees Practitioner's notes/recommendations: Tests de laboratoire indiquant une microalbumine élevée",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 15,
+    "patientId":6,
+    "note" : "Patient: Rees Practitioner's notes/recommendations: Le patient déclare que tout semble aller bien\nLe laboratoire rapporte que l'hémoglobine A1C dépasse le niveau recommandé\nLe patient déclare qu’il fume depuis longtemps",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 16,
+    "patientId":7,
+    "note" : "Patient: Arnold Practitioner's notes/recommendations: Le patient déclare qu'il fume depuis peu",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 17,
+    "patientId":7,
+    "note" : "Patient: Arnold Practitioner's notes/recommendations: Tests de laboratoire indiquant une microalbumine élevée",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 18,
+    "patientId":7,
+    "note" : "Patient: Arnold Practitioner's notes/recommendations: Le patient déclare qu'il est fumeur et qu'il a cessé de fumer l'année dernière\nIl se plaint également de crises d’apnée respiratoire anormales\nTests de laboratoire indiquant un taux de cholestérol LDL élevé",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 19,
+    "patientId":7,
+    "note" : "Patient: Arnold Practitioner's notes/recommendations: Tests de laboratoire indiquant un taux de cholestérol LDL élevé",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 20,
+    "patientId":8,
+    "note" : "Patient: Sharp Practitioner's notes/recommendations: Le patient déclare qu'il lui est devenu difficile de monter les escaliers\nIl se plaint également d’être essoufflé\nTests de laboratoire indiquant que les anticorps sont élevés\nRéaction aux médicaments",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 21,
+    "patientId":8,
+    "note" : "Patient: Sharp Practitioner's notes/recommendations: Le patient déclare qu'il a mal au dos lorsqu'il reste assis pendant longtemps",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 22,
+    "patientId":8,
+    "note" : "Patient: Sharp Practitioner's notes/recommendations: Le patient déclare avoir commencé à fumer depuis peu\nHémoglobine A1C supérieure au niveau recommandé",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 23,
+    "patientId":9,
+    "note" : "Patient: Ince Practitioner's notes/recommendations: Le patient déclare avoir des douleurs au cou occasionnellement\nLe patient remarque également que certains aliments ont un goût différent\nRéaction apparente aux médicaments\nPoids corporel supérieur au poids recommandé",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 24,
+    "patientId":9,
+    "note" : "Patient: Ince Practitioner's notes/recommendations: Le patient déclare avoir eu plusieurs épisodes de vertige depuis la dernière visite.\nTaille incluse dans la fourchette concernée",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 25,
+    "patientId":9,
+    "note" : "Patient: Ince Practitioner's notes/recommendations: Le patient déclare qu'il souffre encore de douleurs cervicales occasionnelles\nTests de laboratoire indiquant une microalbumine élevée\nFumeur, il a arrêté dans les 12 mois précédents",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 26,
+    "patientId":9,
+    "note" : "Patient: Ince Practitioner's notes/recommendations: Le patient déclare avoir eu plusieurs épisodes de vertige depuis la dernière visite.\nTests de laboratoire indiquant que les anticorps sont élevés",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 27,
+    "patientId":10,
+    "note" : "Patient: Ross Practitioner's notes/recommendations: Le patient déclare qu'il se sent bien\nPoids corporel supérieur au poids recommandé",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 28,
+    "patientId":10,
+    "note" : "Patient: Ross Practitioner's notes/recommendations: Le patient déclare qu'il se sent bien",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 29,
+    "patientId":11,
+    "note" : "Patient: Wilson Practitioner's notes/recommendations: Le patient déclare qu'il se réveille souvent avec une raideur articulaire\nIl se plaint également de difficultés pour s’endormir\nPoids corporel supérieur au poids recommandé\nTests de laboratoire indiquant un taux de cholestérol LDL élevé",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 30,
+    "patientId":12,
+    "note" : "Patient: Buckland Practitioner's notes/recommendations: Les tests de laboratoire indiquent que les anticorps sont élevés\nHémoglobine A1C supérieure au niveau recommandé",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 31,
+    "patientId":13,
+    "note" : "Patient: Clark Practitioner's notes/recommendations: Le patient déclare avoir de la difficulté à se concentrer sur ses devoirs scolaires\nHémoglobine A1C supérieure au niveau recommandé",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 32,
+    "patientId":13,
+    "note" : "Patient: Clark Practitioner's notes/recommendations: Le patient déclare qu'il s’impatiente facilement en cas d’attente prolongée\nIl signale également que les produits du distributeur automatique ne sont pas bons\nTests de laboratoire signalant des taux anormaux de cellules sanguines",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 33,
+    "patientId":13,
+    "note" : "Patient: Clark Practitioner's notes/recommendations: Le patient signale qu'il est facilement irrité par des broutilles\nIl déclare également que l'aspirateur des voisins fait trop de bruit\nTests de laboratoire indiquant que les anticorps sont élevés",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 34,
+    "patientId":14,
+    "note" : "Patient: Bailey Practitioner's notes/recommendations: Le patient déclare qu'il n'a aucun problème",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 35,
+    "patientId":14,
+    "note" : "Patient: Bailey Practitioner's notes/recommendations: Le patient déclare qu'il n'a aucun problème\nTaille incluse dans la fourchette concernée\nHémoglobine A1C supérieure au niveau recommandé",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 36,
+    "patientId":14,
+    "note" : "Patient: Bailey Practitioner's notes/recommendations: Le patient déclare qu'il n'a aucun problème\nPoids corporel supérieur au poids recommandé\nLe patient a signalé plusieurs épisodes de vertige depuis sa dernière visite",
+    "date": "2022-01-09"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 37,
+    "patientId":14,
+    "note" : "Patient: Bailey Practitioner's notes/recommendations: Le patient déclare qu'il n'a aucun problème\nTests de laboratoire indiquant une microalbumine élevée",
     "date": "2022-01-09"
   }
 ]
