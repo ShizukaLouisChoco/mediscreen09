@@ -27,7 +27,7 @@
     <modules>
         <module>patient-service</module>
         <module>note-service</module>
-        <module>report-service</module>
+        <module>assessment-service</module>
         <module>discovery-service</module>
         <module>client-ui</module>
     </modules>
