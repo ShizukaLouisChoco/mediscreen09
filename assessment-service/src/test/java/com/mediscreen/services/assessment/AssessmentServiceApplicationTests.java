@@ -1,10 +1,10 @@
-package com.mediscreen.services.report;
+package com.mediscreen.services.assessment;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ReportServiceApplicationTests {
+class AssessmentServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
