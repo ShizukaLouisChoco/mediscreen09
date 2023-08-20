@@ -27,8 +27,8 @@ public class AssessmentServiceImpl implements AssessmentService {
     }
 
     @Override
-    public PatientBean getPatient(Long patientId){
-        return patientProxy.getPatient(patientId);
+    public PatientBean getPatient(Long id){
+        return patientProxy.getPatient(id);
     }
     @Override
     public PatientBean getPatientByFamily(String family){

@@ -66,7 +66,8 @@ public class AssessmentController {
         try{
             log.info("creating assessment by patient family name : "+ familyName);
             model.addAttribute("patient", patientProxy.getPatientByFamily(familyName));
-            model.addAttribute("assessment",assessmentProxy.assessByFamilyName(familyName));
+            String assessment = assessmentProxy.assessByFamilyName(familyName).toString();
+            model.addAttribute("assessment",assessment.substring(assessment.indexOf("diabetes assessment is:") + "diabetes assessment is:".length()).split(",")[0].trim());
         }catch(Exception exception){
             log.error(String.valueOf(exception));
             model.addAttribute("errorMsg",exception.getMessage());
