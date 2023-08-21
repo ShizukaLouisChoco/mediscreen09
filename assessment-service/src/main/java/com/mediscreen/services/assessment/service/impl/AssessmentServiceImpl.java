@@ -3,7 +3,6 @@ package com.mediscreen.services.assessment.service.impl;
 import com.mediscreen.services.assessment.beans.NoteBean;
 import com.mediscreen.services.assessment.beans.PatientBean;
 import com.mediscreen.services.assessment.entity.Assessment;
-import com.mediscreen.services.assessment.exception.AssessmentErrorException;
 import com.mediscreen.services.assessment.proxy.NoteProxy;
 import com.mediscreen.services.assessment.proxy.PatientProxy;
 import com.mediscreen.services.assessment.service.AssessmentService;
@@ -13,7 +12,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class AssessmentServiceImpl implements AssessmentService {
