@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,9 @@ public class AssessmentServiceImpl implements AssessmentService {
 
     private final PatientProxy patientProxy;
     private final NoteProxy noteProxy;
+
+    private final static String[] keywords = {"hémoglobine A1C", "Hémoglobine A1C","microalbumine","Microalbumine", "taille","Taille", "poids", "Poids", "fumeur", "Fumeur", "anormal","Anormal", "cholestérol", "Cholestérol", "vertige", "Vertige", "rechute", "Rechute", "réaction","Réaction", "anticorps", "Anticorps"};
+
 
     public AssessmentServiceImpl(PatientProxy patientProxy, NoteProxy noteProxy) {
         this.patientProxy = patientProxy;
@@ -50,85 +54,68 @@ public class AssessmentServiceImpl implements AssessmentService {
         return Period.between(patient.getDob(),  LocalDate.now()).getYears();
     }
 
-    public Assessment assessPatient(PatientBean patient){
+    public Assessment assessPatient(PatientBean patient) {
         int age = calculateAge(patient);
         PatientBean.Gender gender = patient.getSex();
-        long triggerScore = countKeywords(patient.getId());
-
+        int triggerScore = countKeywords(patient.getId());
 
         // Man under 30
-        if (gender.equals(PatientBean.Gender.M) && age < 30) {
+        if(age < 30 ) {
+            if (gender.equals(PatientBean.Gender.M)) {
+                if (triggerScore <= 2) {
+                    return Assessment.None;
+                }
 
-            if (triggerScore <= 2) {
-                return Assessment.None;
+                if (triggerScore <= 4) {
+                    return Assessment.In_danger;
+                }
+
+                return Assessment.Early_onset;
             }
 
-            if (triggerScore <= 4) {
-                return Assessment.In_danger;
-            }
+            // woman under 30
+            else if (gender.equals(PatientBean.Gender.F) ) {
 
-            return Assessment.Early_onset;
+                if (triggerScore <= 3) {
+                    return Assessment.None;
+                }
+
+                if (triggerScore <= 6) {
+                    return Assessment.In_danger;
+                }
+
+                return Assessment.Early_onset;
+            }
+            // over 30
         }
 
-        // woman under 30
-        if (gender.equals(PatientBean.Gender.F) && age < 30) {
-
-            if (triggerScore <= 3) {
-                return Assessment.None;
-            }
-
-            if (triggerScore <= 6) {
-                return Assessment.In_danger;
-            }
-
-            return Assessment.Early_onset;
+        if (triggerScore <= 1) {
+            return Assessment.None;
         }
 
-        // over 30
-        if (age >= 30) {
-
-            if (triggerScore <= 1) {
-                return Assessment.None;
-            }
-
-            if (triggerScore <= 5) {
-                return Assessment.Borderline;
-            }
-
-            if (triggerScore <= 7) {
-                return Assessment.In_danger;
-            }
-
-            return Assessment.Early_onset;
+        if (triggerScore <= 5) {
+            return Assessment.Borderline;
         }
 
-        new AssessmentErrorException("Failed to complete assessment with this patient id : " + patient.getId());
+        if (triggerScore <= 7) {
+            return Assessment.In_danger;
+        }
 
-        return Assessment.Error;
+        return Assessment.Early_onset;
     }
 
-    private long countKeywords(Long id) {
+    private int countKeywords(Long id) {
         int count = 0;
-        List<String> notes = noteProxy.getNoteByPatient(id).stream().map(NoteBean::getNote).collect(Collectors.toList());
+        List<String> notes = noteProxy.getNoteByPatient(id).stream().map(NoteBean::getNote).toList();
+
         for (String note : notes) {
-            count += countKeywordsInString(note, keywords);
-        }
-        return count;
-
-    }
-
-    public static int countKeywordsInString(String input, String[] keywords) {
-        int count = 0;
-        for (String keyword : keywords) {
-            int index = input.indexOf(keyword);
-            while (index != -1) {
-                count++;
-                index = input.indexOf(keyword, index + keyword.length());
+            count += Arrays.stream(keywords)
+                    .filter(note::contains)
+                    .count();
             }
-        }
         return count;
+
     }
 
-    String[] keywords = {"hémoglobine A1C", "Hémoglobine A1C","microalbumine","Microalbumine", "taille","Taille", "poids", "Poids", "fumeur", "Fumeur", "anormal","Anormal", "cholestérol", "Cholestérol", "vertige", "Vertige", "rechute", "Rechute", "réaction","Réaction", "anticorps", "Anticorps"};
 
 }
