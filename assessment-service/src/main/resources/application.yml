@@ -1,9 +1,9 @@
+server:
+  port: 9200
+
 spring:
   application:
     name: assessment-service
-
-server:
-  port: 9200
 
 eureka:
   client:
