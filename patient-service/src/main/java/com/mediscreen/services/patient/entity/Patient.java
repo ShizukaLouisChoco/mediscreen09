@@ -43,16 +43,5 @@ public class Patient implements Serializable {
         M,
         F
     }
-    public Patient(String family, String given, LocalDate dob, Gender sex, String address, String phone){
-        this.family = family;
-        this.given = given;
-        this.dob = dob;
-        this.sex = sex;
-        this.address = address;
-        this.phone = phone;
-    }
-
-
-
 
 }

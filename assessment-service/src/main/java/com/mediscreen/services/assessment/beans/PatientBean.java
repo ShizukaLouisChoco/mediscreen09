@@ -37,56 +37,20 @@ public class PatientBean {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getFamily() {
         return family;
-    }
-
-    public void setFamily(String family) {
-        this.family = family;
     }
 
     public String getGiven() {
         return given;
     }
 
-    public void setGiven(String given) {
-        this.given = given;
-    }
-
     public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
-    }
-
     public Gender getSex() {
         return sex;
-    }
-
-    public void setSex(Gender sex) {
-        this.sex = sex;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
 
