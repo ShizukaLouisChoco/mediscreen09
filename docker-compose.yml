@@ -45,6 +45,7 @@ services:
       - zipkin
     environment:
       SPRING_PROFILES_ACTIVE: docker
+
   gateway-service:
     image: mediscreen/gateway-service:1.1-SNAPSHOT
     ports:
