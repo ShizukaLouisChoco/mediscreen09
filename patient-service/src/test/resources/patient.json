@@ -1,7 +1,7 @@
 [
   {
     "_class": "com.mediscreen.services.patient.entity.Patient",
-    "id": 0,
+    "id": 1,
     "family": "TestNone",
     "given": "Test",
     "dob": "1966-12-31",
@@ -11,7 +11,7 @@
   },
   {
     "_class": "com.mediscreen.services.patient.entity.Patient",
-    "id": 1,
+    "id": 2,
     "family": "TestBorderline",
     "given": "Test",
     "dob": "1945-06-24",
@@ -21,7 +21,7 @@
   },
   {
     "_class": "com.mediscreen.services.patient.entity.Patient",
-    "id": 2,
+    "id": 3,
     "family": "TestDanger",
     "given": "Test",
     "dob": "2004-06-28",
@@ -31,7 +31,7 @@
   },
   {
     "_class": "com.mediscreen.services.patient.entity.Patient",
-    "id": 3,
+    "id": 4,
     "family": "TestEarlyOnset",
     "given": "Test",
     "dob": "2002-06-28",

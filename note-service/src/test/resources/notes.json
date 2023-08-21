@@ -1,0 +1,44 @@
+[
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 0,
+    "patientId":1,
+    "note" : "Patient: TestNone Practitioner's notes/recommendations: Le patient déclare qu'il se sent « en pleine forme »\nPoids égal ou inférieur au niveau recommandé",
+    "date": "2022-01-01"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 1,
+    "patientId":2,
+    "note" : "Patient: TestBorderline Practitioner's notes/recommendations: Le patient déclare ressentir beaucoup de stress au travail\nLe patient se plaint également que son ouïe semble anormale ces derniers temps",
+    "date": "2022-01-02"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 2,
+    "patientId":2,
+    "note" : "Patient: TestBorderline Practitioner's notes/recommendations: Le patient déclare avoir eu une réaction à un médicament au cours des 3 derniers mois. Le patient se plaint également que son audition continue à poser problème",
+    "date": "2022-01-03"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 3,
+    "patientId":3,
+    "note" : "Patient: TestInDanger Practitioner's notes/recommendations: Le patient déclare être fumeur à court terme",
+    "date": "2022-01-04"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 4,
+    "patientId":3,
+    "note" : "Patient: TestInDanger Practitioner's notes/recommendations: Le patient déclare avoir arrêté de fumer au cours de la dernière année\nLe patient se plaint également de périodes de respiration anormale\nLes rapports de laboratoire indiquent un taux élevé de cholestérol LDL",
+    "date": "2022-01-05"
+  },
+  {
+    "_class": "com.mediscreen.services.note.entity.Note",
+    "id": 5,
+    "patientId":4,
+    "note" : "Patient: TestEarlyOnset Practitioner's notes/recommendations: Le patient déclare avoir des difficultés à monter les escaliers\nLe patient se plaint également d'avoir des essoufflements\nLes résultats de laboratoire indiquent la présence d'anticorps élevés en réaction à un médicament",
+    "date": "2022-01-06"
+  }
+]
