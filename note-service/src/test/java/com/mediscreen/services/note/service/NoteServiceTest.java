@@ -90,10 +90,26 @@ public class NoteServiceTest {
                 .isNotNull()
                 .satisfies(arg -> assertThat(arg).isEqualTo(updateingNote));
     }
+
+    @Test
+    public void updateNoteThrowsExceptionTest(){
+        //GIVEN
+        Optional<Note> noteOptional = Optional.empty();
+        Note note = new Note();
+        //WHEN
+        when(noteRepository.findById(any())).thenReturn(noteOptional);
+
+        //THEN
+        assertThatThrownBy(() -> {
+            noteService.updateNote("test",note);
+        })
+                .isInstanceOf(NoteErrorException.class)
+                .hasMessageContaining("Not found note with this id");
+    }
     @Test
     public void createNoteTest(){
         //GIVEN
-        final Note newNote = new Note("10",1L,"Note1", LocalDate.of(1966,12,31));
+        final Note newNote = new Note(null,1L,"Note1", LocalDate.of(1966,12,31));
         when(noteRepository.save(any())).thenAnswer(p -> p.getArguments()[0]);
 
         //WHEN
@@ -103,7 +119,9 @@ public class NoteServiceTest {
         verify(noteRepository,times(1)).save(any(Note.class));
         assertThat(result)
                 .isNotNull()
-                .satisfies(arg -> assertThat(arg).isEqualTo(newNote));
+                .satisfies(arg -> assertThat(arg.getPatientId()).isEqualTo(newNote.getPatientId()))
+                .satisfies(arg -> assertThat(arg.getDate()).isEqualTo(newNote.getDate()))
+                .satisfies(arg -> assertThat(arg.getNote()).isEqualTo(newNote.getNote()));
     }
 
 
@@ -120,5 +138,20 @@ public class NoteServiceTest {
         verify(noteRepository,times(1)).deleteById(registeredNote.getId());
     }
 
+    @Test
+    public void deleteNoteThrowsExceptionTest(){
+        //GIVEN
+        Optional<Note> noteOptional = Optional.empty();
+        Note note = new Note();
+        //WHEN
+        when(noteRepository.findById(any())).thenReturn(noteOptional);
+
+        //THEN
+        assertThatThrownBy(() -> {
+            noteService.deleteNoteById("test");
+        })
+                .isInstanceOf(NoteErrorException.class)
+                .hasMessageContaining("Not found note with this id");
+    }
 
 }

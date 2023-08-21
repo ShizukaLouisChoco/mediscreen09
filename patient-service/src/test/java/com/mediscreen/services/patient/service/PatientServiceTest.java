@@ -47,6 +47,39 @@ public class PatientServiceTest {
                 .satisfies(arg -> assertThat(arg).isEqualTo(registeredPatient));
 
     }
+    @Test
+    public void getPatientByFamilyAndGivenTest(){
+        // GIVEN
+        final Patient registeredPatient = new Patient(Long.valueOf(1),"TestNone","Test", LocalDate.of(1966,12,31),F, "1 Brookside St", "100-222-3333");
+
+        // WHEN
+        when(patientRepository.findPatientByFamilyAndGiven(any(),any())).thenReturn(Optional.of(registeredPatient));
+
+        Patient result = patientService.getPatientByFamilyAndGiven(registeredPatient.getFamily(),registeredPatient.getGiven());
+
+        // THEN
+        assertThat(result)
+                .isNotNull()
+                .satisfies(arg -> assertThat(arg).isEqualTo(registeredPatient));
+
+    }
+
+    @Test
+    public void getPatientByFamily(){
+        // GIVEN
+        final Patient registeredPatient = new Patient(Long.valueOf(1),"TestNone","Test", LocalDate.of(1966,12,31),F, "1 Brookside St", "100-222-3333");
+
+        // WHEN
+        when(patientRepository.findPatientByFamily(any())).thenReturn(Optional.of(registeredPatient));
+
+        Patient result = patientService.getPatientByFamily(registeredPatient.getFamily());
+
+        // THEN
+        assertThat(result)
+                .isNotNull()
+                .satisfies(arg -> assertThat(arg).isEqualTo(registeredPatient));
+
+    }
 
     @Test
     public void getPatientWithExceptionTest(){
@@ -80,6 +113,38 @@ public class PatientServiceTest {
     }
 
     @Test
+    public void getPatientsThrowsExceptionTest(){
+        //GIVEN
+        List<Patient> patientList = List.of();
+
+        //WHEN
+        when(patientRepository.findAll()).thenReturn(patientList);
+
+        //THEN
+        assertThatThrownBy(() -> {
+            patientService.getPatients();
+        })
+                .isInstanceOf(PatientErrorException.class)
+                .hasMessageContaining("No patient registered");
+    }
+
+    @Test
+    public  void getPatientsByFamilyAndGivenTest(){
+        //GIVEN
+        List<Patient> patientList = new ArrayList<>();
+        Patient patient = new Patient(1L,"Test","Test",LocalDate.of(2000,01,01),F,"Address","Phone");
+        patientList.add(patient);
+        when(patientRepository.findPatientsByFamilyAndGiven(any(),any())).thenReturn(Optional.of(patientList));
+
+        //WHEN
+        var result = patientService.getPatientsByFamilyAndGiven(patient.getFamily(),patient.getGiven());
+
+        //THEN
+        verify(patientRepository,times(1)).findPatientsByFamilyAndGiven(any(),any());
+
+    }
+
+    @Test
     public void updatePatientTest(){
         // GIVEN
         final Patient registeredPatient = new Patient(Long.valueOf(1),"TestNone","Test",LocalDate.of(1966,12,31),F, "1 Brookside St", "100-222-3333");
@@ -101,7 +166,7 @@ public class PatientServiceTest {
     @Test
     public void createPatientTest(){
         //GIVEN
-        final Patient expectedPatient = new Patient(Long.valueOf(10L),"TestOne","Test",LocalDate.of(1966,12,31),F, "1 Brookside St", "100-222-3333");
+        final Patient expectedPatient = new Patient(null,"TestOne","Test",LocalDate.of(1966,12,31),F, "1 Brookside St", "100-222-3333");
 
         //WHEN
         when(patientRepository.findById(any())).thenReturn(Optional.empty());
@@ -134,6 +199,18 @@ public class PatientServiceTest {
         })
                 .isInstanceOf(PatientErrorException.class)
                 .hasMessageContaining("This patient : " + registeredPatient.getFamily() + " " + registeredPatient.getGiven() + " is already registered");
+    }
+
+    @Test
+    public void deletePatientTest(){
+        //GIVEN
+        final Patient expectedPatient = new Patient(1L,"TestOne","Test",LocalDate.of(1966,12,31),F, "1 Brookside St", "100-222-3333");
+
+        //WHEN
+        patientService.deletePatient(expectedPatient.getId());
+
+        //THEN
+        verify(patientRepository,times(1)).deleteById(expectedPatient.getId());
     }
 
 }
