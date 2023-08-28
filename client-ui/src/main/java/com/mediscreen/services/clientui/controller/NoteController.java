@@ -8,8 +8,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -45,15 +49,15 @@ public class NoteController {
             model.addAttribute("errorMsg",exception.getMessage());
             return "noteAdd";
         }
-        return "redirect:/notes";
+        return "redirect:/patients/"+note.getPatientId();
     }
 
     //CREATE FORM
-    @GetMapping("/notes/add")
-    public String addNoteForm(Model model) {
+    @GetMapping("/notes/{id}/add")
+    public String addNoteForm(@PathVariable("id") Long id,Model model) {
         log.info("getmapping /notes/add returns noteAdd.html");
 
-        model.addAttribute("note", new NoteBean());
+        model.addAttribute("note", new NoteBean("",id,"",LocalDate.now()));
 
         return "noteAdd";
     }
@@ -117,7 +121,7 @@ public class NoteController {
             return "updateNotePage";
         }
         log.info("note is updated");
-        return "redirect:/notes/" + note.getId();
+        return "redirect:/patients/"+note.getPatientId();
     }
 
 
@@ -130,7 +134,7 @@ public class NoteController {
 
         noteProxy.deleteNoteById(id);
 
-        return "redirect:/notes" ;
+        return "redirect:/patients/"+patientId ;
     }
 
 
@@ -141,6 +145,6 @@ public class NoteController {
 
         noteProxy.deleteNoteByPatientId(patientId);
 
-        return "redirect:/notes";
+        return "redirect:/patients/"+patientId;
     }
 }

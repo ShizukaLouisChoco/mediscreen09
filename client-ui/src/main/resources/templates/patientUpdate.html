@@ -135,7 +135,7 @@
             </div>
             <div class="row ">
                 <div class="col-4 offset-4 text-center">
-                    <button class="btn btn-danger text-white" type="reset"><a style="text-decoration:none; color:white;"href="/patients">Cancel</a></button>
+                    <button class="btn btn-danger text-white" type="reset"><a style="text-decoration:none; color:white;" th:href="@{/patients/{patientId}(patientId=${patient.id})}">Cancel</a></button>
                     <button class="btn btn-primary" type="submit">Update</button>
                 </div>
             </div>

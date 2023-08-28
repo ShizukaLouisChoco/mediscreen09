@@ -25,6 +25,15 @@
                     <p th:text="${errorMsg}"></p>
                 </div>
             </div>
+            <!--id-->
+            <div class="row my-2 justify-content-center">
+                <div class="col-3 ">
+                    <label for="id" class=" col-form-label ">Id</label>
+                </div>
+                <div class="col-3 ">
+                    <input type="hidden" th:field="*{id}" id="id" placeholder="id will be automatically numbered"/>
+                </div>
+            </div>
             <!--patient id-->
             <div class="row my-2 justify-content-center">
                 <div class="col-3 ">
@@ -73,16 +82,14 @@
                        th:errorclass="error" th:errors="*{note}"></p>
                 </div>
             </div>
-
             <div class="row ">
                 <div class="col-4 offset-4 text-center">
-                    <button class="btn btn-danger text-white" type="reset"><a style="text-decoration:none; color:white;" href="/notes">Cancel</a></button>
+                    <button class="btn btn-danger text-white" type="reset"><a style="text-decoration:none; color:white;" th:href="@{/patients/{patientId}(patientId=${note.patientId})}">Cancel</a></button>
                     <button class="btn btn-primary" type="submit">Create</button>
                 </div>
             </div>
         </div>
     </form>
-
 </section>
 </body>
 </html>

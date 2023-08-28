@@ -1,0 +1,58 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient information</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<!--contents allPatient.html-->
+<section th:if="${patients}">
+    <div class="container-fluid text-center p-5">
+        <div class="row mb-2">
+            <div class="col">
+                <div >
+                    <div class="row">
+                        <div class="col-2">
+                        </div>
+                        <div class="col-8">
+                            <h1>All Patients information</h1>
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-primary text-white " ><a style="text-decoration:none; color:white;" th:href="@{/patients/add}">Add new patient</a></button>
+                        </div>
+                    </div>
+                        <table class="table table-striped text-center">
+                        <thead class="bg-success text-white font-weight-normal">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Family name</th>
+                            <th scope="col">Given name</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:if="${patients.isEmpty()}">
+                            <td colspan="3">No patients</td>
+                        </tr>
+                        <tr th:each="patient, iterstat : ${patients}" th:class="${iterstat.odd}?'odd'">
+                            <td th:text="${patient.id}"></td>
+                            <td th:text="${patient.family}"></td>
+                            <td th:text="${patient.given}"></td>
+                            <td>
+                                <button class="btn btn-primary text-white " ><a style="text-decoration:none; color:white;" th:href="@{/patients/{patientId}(patientId=${patient.id})}">Detail</a></button>
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,6 +1,7 @@
 package com.mediscreen.services.clientui.controller;
 
 import com.mediscreen.services.clientui.beans.PatientBean;
+import com.mediscreen.services.clientui.proxy.AssessmentProxy;
 import com.mediscreen.services.clientui.proxy.NoteProxy;
 import com.mediscreen.services.clientui.proxy.PatientProxy;
 import jakarta.validation.Valid;
@@ -17,10 +18,13 @@ public class PatientController {
     private final PatientProxy patientProxy;
     private final NoteProxy noteProxy;
 
+    private final AssessmentProxy assessmentProxy;
 
-    public PatientController(PatientProxy patientProxy, NoteProxy noteProxy) {
+
+    public PatientController(PatientProxy patientProxy, NoteProxy noteProxy, AssessmentProxy assessmentProxy) {
         this.patientProxy = patientProxy;
         this.noteProxy = noteProxy;
+        this.assessmentProxy = assessmentProxy;
     }
 
     //CREATE
@@ -45,7 +49,7 @@ public class PatientController {
         }
         log.info("patient is created");
 
-        return "redirect:/patients";
+        return "redirect:/";
 
     }
 
@@ -58,12 +62,12 @@ public class PatientController {
     }
 
     //READ ALL
-    @GetMapping(value ="/patients")
+    @GetMapping(value ="/")
     public String getAllPatients(Model model){
-        log.info("getmapping /patients for patientList()");
+        log.info("getmapping / for gatAllPatients()");
         model.addAttribute("patients",patientProxy.getAllPatients());
 
-        return "patientPage";
+        return "allPatients";
     }
 
     //READ ONE
@@ -71,6 +75,16 @@ public class PatientController {
     public String getPatient(@PathVariable Long id, Model model){
         log.info("getmapping /patients/{id} for getPatient()");
         model.addAttribute("patient",patientProxy.getPatient(id));
+        model.addAttribute("notes",noteProxy.getNoteByPatientId(id));
+        try{
+            log.info("creating assessment by patient id : "+ id);
+            String assessment = assessmentProxy.assessById(id).toString();
+            model.addAttribute("assessment",assessment.substring(assessment.indexOf("diabetes assessment is:") + "diabetes assessment is:".length()).split(",")[0].trim());
+        }catch(Exception exception){
+            log.error(String.valueOf(exception));
+            model.addAttribute("errorMsg",exception.getMessage());
+            return "patientPage";
+        }
         return "patientPage";
     }
 
@@ -119,6 +133,6 @@ public class PatientController {
     String deletePatient(@PathVariable("id") Long id){
         log.info("getmapping /patients/delete/{id} for deletePatient()");
         patientProxy.deletePatient(id);
-        return "redirect:/patients";
+        return "redirect:/";
     }
 }
