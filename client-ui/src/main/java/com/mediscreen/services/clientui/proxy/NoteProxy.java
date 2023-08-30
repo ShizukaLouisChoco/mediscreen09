@@ -15,10 +15,6 @@ public interface NoteProxy {
     @PostMapping(value = "/notes")
     NoteBean addNote(@RequestBody NoteBean note);
 
-    //CREATE FORM
-    @GetMapping(value ="/notes/add")
-    NoteBean addNoteForm();
-
     //READ ALL
     @GetMapping("/notes")
     List<NoteBean> getAllNote();
@@ -35,10 +31,6 @@ public interface NoteProxy {
     //UPDATE
     @PutMapping("/notes/{id}")
     NoteBean updateNote (@PathVariable String id, @RequestBody NoteBean noteBean);
-
-    //UPDATE FORM
-    @GetMapping("/notes/update/{id}")
-    NoteBean updateNoteForm (@PathVariable String  id);
 
     //DELETE
     @GetMapping("/notes/delete/{id}")
