@@ -3,6 +3,7 @@ package com.mediscreen.services.clientui.controller;
 import com.mediscreen.services.clientui.beans.NoteBean;
 import com.mediscreen.services.clientui.exception.NoteErrorException;
 import com.mediscreen.services.clientui.proxy.NoteProxy;
+import com.mediscreen.services.clientui.proxy.PatientProxy;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -23,9 +24,11 @@ import java.util.List;
 public class NoteController {
 
     private final NoteProxy noteProxy;
+    private final PatientProxy patientProxy;
 
-    public NoteController(NoteProxy noteProxy) {
+    public NoteController(NoteProxy noteProxy, PatientProxy patientProxy) {
         this.noteProxy = noteProxy;
+        this.patientProxy = patientProxy;
     }
 
     //CREATE
@@ -58,6 +61,7 @@ public class NoteController {
         log.info("getmapping /notes/add returns noteAdd.html");
 
         model.addAttribute("note", new NoteBean("",id,"",LocalDate.now()));
+        model.addAttribute("patient",patientProxy.getPatient(id));
 
         return "noteAdd";
     }
@@ -98,7 +102,8 @@ public class NoteController {
         log.info("getmapping /notes/update/{id} for updateNoteForm()");
 
         model.addAttribute("note", noteProxy.getNote(id));
-
+        Long patientId = noteProxy.getNote(id).getPatientId();
+        model.addAttribute("patient",patientProxy.getPatient(patientId));
         return "noteUpdate";
     }
 
