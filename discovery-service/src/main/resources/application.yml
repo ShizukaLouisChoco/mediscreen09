@@ -6,13 +6,17 @@ spring:
     name: discovery-service
 
 eureka:
+  instance:
+    hostname: localhost
   client:
+    registerWithEureka: false
+    fetchRegistry: false
     serviceUrl:
-      defaultZone: http://localhost:8061/eureka/
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 
 
 
-management:
-  zipkin:
+
+management:zipkin:
     tracing:
       endpoint: http://${ZIPKIN_HOST:localhost}:9411/api/v2/spans
