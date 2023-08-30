@@ -84,24 +84,6 @@ public class NoteControllerIT {
 
     }
 
-    @Test
-    public void addNoteFormTest() throws Exception{
-        //GIVEN
-        final String url = "/notes/add";
-        Note testNote = new Note();
-
-        //WHEN
-        final var result = mockMvc.perform(get(url))
-                .andDo(MockMvcResultHandlers.print());
-
-        //THEN
-        result.andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.patientId").value(testNote.getPatientId()))
-                .andExpect(jsonPath("$.note").value(testNote.getNote()))
-                .andExpect(jsonPath("$.date").value(testNote.getDate()));
-    }
-
 
     @Test
     public void getNoteByIdTest() throws Exception{
@@ -143,23 +125,6 @@ public class NoteControllerIT {
 
     }
 
-    @Test
-    public void updateNoteFormTest() throws Exception{
-        //GIVEN
-        final String url = "/notes/update/{id}";
-        Note testNote = noteService.getNoteById("3");
-        //WHEN
-        final var result = mockMvc.perform(get(url,testNote.getId())
-                .contentType(MediaType.APPLICATION_JSON));
-
-        //THEN
-        result.andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(testNote.getId()))
-                .andExpect(jsonPath("$.patientId").value(testNote.getPatientId()))
-                .andExpect(jsonPath("$.note").value(testNote.getNote()))
-                .andExpect(jsonPath("$.date").value(testNote.getDate().toString()));
-    }
 
     @Test
     public void deleteNoteTest() throws Exception{

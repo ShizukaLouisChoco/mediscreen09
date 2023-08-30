@@ -53,28 +53,6 @@ public class PatientControllerIT {
     }
 
 
-
-    @Test
-    public void createPatientFormTest() throws Exception {
-        //GIVEN
-        Patient testPatient = new Patient();
-        final String url = "/patient/add";
-
-        // WHEN
-        final var response = mockMvc.perform(get(url))
-                .andDo(MockMvcResultHandlers.print());
-
-
-        // THEN
-        response.andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.family").value(testPatient.getFamily()))
-                .andExpect(jsonPath("$.given").value(testPatient.getGiven()))
-                .andExpect(jsonPath("$.dob").value(testPatient.getDob()))
-                .andExpect(jsonPath("$.address").value(testPatient.getAddress()))
-                .andExpect(jsonPath("$.phone").value(testPatient.getPhone()));
-    }
-
      @Test
     public void getAllPatientsTest() throws Exception {
         //GIVEN
@@ -135,27 +113,6 @@ public class PatientControllerIT {
 
 
     @Test
-    public void getPatientAndHistoryTest() throws Exception {
-        //GIVEN
-        final String url = "/patients/{id}/history";
-        Patient patient = patientService.getPatient(1L);
-        // WHEN
-        final var response = mockMvc.perform(get(url,patient.getId()))
-                .andDo(MockMvcResultHandlers.print());
-
-
-        // THEN
-        response.andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(patient.getId()))
-                .andExpect(jsonPath("$.family").value(patient.getFamily()))
-                .andExpect(jsonPath("$.given").value(patient.getGiven()))
-                .andExpect(jsonPath("$.dob").value(patient.getDob().toString()))
-                .andExpect(jsonPath("$.address").value(patient.getAddress()))
-                .andExpect(jsonPath("$.phone").value(patient.getPhone()));
-    }
-
-    @Test
     public void updatePatientTest() throws Exception{
         //GIVEN
         final String url = "/patients/{id}";
@@ -178,27 +135,6 @@ public class PatientControllerIT {
                 .andExpect(jsonPath("$.phone").value(patient.getPhone()));
     }
 
-    @Test
-    public void updatePatientFormTest() throws Exception{
-        //GIVEN
-        final String url = "/patients/update/{id}";
-        Patient patient = patientService.getPatient(2L);
-        // WHEN
-        final var response = mockMvc.perform(get(url,patient.getId()))
-                .andDo(MockMvcResultHandlers.print());
-
-
-        // THEN
-        response.andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(patient.getId()))
-                .andExpect(jsonPath("$.family").value(patient.getFamily()))
-                .andExpect(jsonPath("$.given").value(patient.getGiven()))
-                .andExpect(jsonPath("$.dob").value(patient.getDob().toString()))
-                .andExpect(jsonPath("$.address").value(patient.getAddress()))
-                .andExpect(jsonPath("$.phone").value(patient.getPhone()));
-
-    }
 
     @Test
     public void deletePatientTest() throws Exception{

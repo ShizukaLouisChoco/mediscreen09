@@ -21,7 +21,7 @@ public class PatientController {
 
     /**
      * PostMapping - add a new patient
-     * url : http://localhost:8080/patient/add
+     * url : http://localhost:9000/patient/add
      * @param patient to add
      * @return The saved patient object
      */
@@ -33,22 +33,10 @@ public class PatientController {
         return patientService.createPatient(patient);
     }
 
-    /**
-     * GetMapping - add a new patient form
-     * url : http://localhost:8080/patient/add
-     * @return The saved patient object
-     */
-    @GetMapping(value = "/patient/add")
-    public Patient createPatientForm(){
-        log.info(".createPerson");
-        log.info("Accessed endpoint URL:/patient/add");
-        return new Patient();
-    }
-
 
     /**
      * GetMapping - Get all patients
-     * url : http://localhost:8080/patients
+     * url : http://localhost:9000/patients
      * @return list of all patients
      */
     @GetMapping("/patients")
@@ -62,7 +50,7 @@ public class PatientController {
 
     /**
      * GetMapping - Get patient
-     * url : http://localhost:8080/patients/{id}
+     * url : http://localhost:9000/patients/{id}
      * @return patient info with patientId
      */
     @GetMapping("/patients/{id}")
@@ -75,9 +63,9 @@ public class PatientController {
     }
 
     /**
-     * GetMapping - Get patient
-     * url : http://localhost:8080/patients/{id}
-     * @return patient info with patientId
+     * GetMapping - Get patient by family
+     * url : http://localhost:9000/patients/family/{family}
+     * @return patient info with patient family
      */
     @GetMapping("/patients/family/{family}")
     public Optional<Patient> getPatientByFamily(@PathVariable String family){
@@ -88,23 +76,10 @@ public class PatientController {
         return Optional.of(patientService.getPatientByFamily(family));
     }
 
-    /**
-     * GetMapping - Get patient
-     * url : http://localhost:8080/patients/{id}
-     * @return patient info with patientId
-     */
-    @GetMapping("/patients/{id}/history")
-    public Optional<Patient> getPatientAndHistory(@PathVariable Long id){
-        log.info(".getPatient");
-        log.info("Accessed endpoint URL:/patient/get");
-        log.debug("Request details: GETMapping");
-
-        return Optional.of(patientService.getPatient(id));
-    }
 
     /**
      * PutMapping - Update an existing patient
-     * url : http://localhost:8080/patients/{id}
+     * url : http://localhost:9000/patients/{id}
      * @return The updated patient updated
      */
     @PutMapping("/patients/{id}")
@@ -115,17 +90,11 @@ public class PatientController {
 
         return updatePatient;
     }
+
     /**
-     * GetMapping - form to Update an existing patient
-     * url : http://localhost:8080/patient/update/{patientId}
-     * @return The form to update patient
+     * GetMapping - Delete existing patient
+     * url : http://localhost:9000/patients/{id}
      */
-    @GetMapping("/patients/update/{id}")
-    public Patient updatePatientForm(@PathVariable("id") Long id) {
-        log.info(".updatePatientForm");
-        log.info("Accessed endpoint URL:/patient/update/{patientId}");
-        return patientService.getPatient(id);
-    }
 
     @GetMapping("patients/delete/{id}")
     public void deletePatient(@PathVariable("id") Long id){

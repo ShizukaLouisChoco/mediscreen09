@@ -15,10 +15,6 @@ public interface PatientProxy {
     @PostMapping(value = "/patients")
     PatientBean createPatient(@RequestBody PatientBean patient);
 
-    //CREATE FORM
-    @GetMapping(value = "/patients/add")
-    PatientBean createPatientForm();
-
     //READ ALL
     @GetMapping(value ="/patients")
     List<PatientBean> getAllPatients();
@@ -34,10 +30,6 @@ public interface PatientProxy {
     //UPDATE
     @PutMapping(value ="/patients/{id}")
     PatientBean updatePatient(@PathVariable Long id, @RequestBody PatientBean patient);
-
-    //UPDATE FORM
-    @GetMapping(value ="/patients/update/{id}")
-    PatientBean updatePatientForm(@PathVariable("id") Long id);
 
     //DELETE ONE
     @GetMapping(value ="/patients/delete/{id}")

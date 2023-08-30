@@ -22,7 +22,12 @@ public class AssessmentController {
         this.assessmentService = assessmentService;
     }
 
-
+    /**
+     * PostMapping - create assessment of a patient with {id}
+     * url : http://localhost:9200/assess/id
+     * @param patientId
+     * @return message with assessment
+     */
     @PostMapping("/assess/id")
     public ResponseEntity<String> assessById(@RequestParam("patId") Long patientId) {
         PatientBean patientToAssess = assessmentService.getPatient(patientId);
@@ -33,6 +38,12 @@ public class AssessmentController {
         return new ResponseEntity<>(responseMessage, HttpStatus.OK);
     }
 
+    /**
+     * PostMapping - create assessment of a patient with {familyName}
+     * url : http://localhost:9200/assess/familyName
+     * @param familyName
+     * @return message with assessment
+     */
     @PostMapping("/assess/familyName")
     public ResponseEntity<String> assessByFamilyName(@RequestParam("familyName") String familyName) {
         PatientBean patientToAssess = assessmentService.getPatientByFamily(familyName);
