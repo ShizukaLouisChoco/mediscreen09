@@ -1,0 +1,10 @@
+FROM openjdk
+ARG JAR_FILE=target/*.jar
+ADD ${JAR_FILE} app.jar
+ENV DATABASE_HOST=mysql
+ENV DATABASE_PORT=3306
+ENV DATABASE_NAME=mediscreen
+ENV DATABASE_USER=root
+ENV DATABASE_PASSWORD=password
+
+ENTRYPOINT ["java","-jar","/app.jar"]

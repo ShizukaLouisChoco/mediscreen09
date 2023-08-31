@@ -17,6 +17,8 @@ spring:
       port: 27017
       uri: mongodb://localhost:27017/mediscreen09
       host: ${MONGO_HOST:localhost}
+      security:
+        authorization: enabled
 
 eureka:
   client:
