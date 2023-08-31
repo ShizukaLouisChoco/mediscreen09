@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "patient-service", url = "localhost:9000")
+@FeignClient(name = "patient-service", url = "${spring.cloud.openfeign.client.config.patient-service.url}")
 @LoadBalancerClient(name = "patient-service")
 public interface PatientProxy {
 

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "note-service", url = "localhost:9100")
+@FeignClient(name = "note-service", url = "${spring.cloud.openfeign.client.config.note-service.url}")
 @LoadBalancerClient(name = "note-service")
 public interface NoteProxy {
 

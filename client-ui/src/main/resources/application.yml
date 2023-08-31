@@ -8,7 +8,16 @@ server:
 spring:
   application:
     name: client-ui
-
+  cloud:
+    openfeign:
+      client:
+        config:
+          assessment-service:
+            url: http://localhost:9200
+          note-service:
+            url: http://localhost:9100
+          patient-service:
+            url: http://localhost:9000
 
 eureka:
   client:
@@ -20,3 +29,9 @@ management:
   zipkin:
     tracing:
       endpoint: http://${ZIPKIN_HOST:localhost}:9411/api/v2/spans
+
+
+mediscreen:
+  proxy:
+    - patient: localhost
+    - note:
