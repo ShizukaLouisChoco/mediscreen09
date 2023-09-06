@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @LoadBalancerClient(name ="patient-service")
-@FeignClient(name = "patient-service")
+@FeignClient(name = "patient-service", url = "${spring.cloud.openfeign.client.config.patient-service.url}")
 public interface PatientProxy {
 
     @GetMapping("/patients/{id}")
