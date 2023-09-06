@@ -21,7 +21,7 @@
     </properties>
 
     <dependencies>
-        <!--Spring boot-->
+<!--Spring boot-->
         <!--actuator-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -42,17 +42,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!--Spring cloud-->
-        <!--config-->
-        <!--<dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
-        </dependency>-->
-        <!--bootstrap.yml-->
-        <!--<dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bootstrap</artifactId>
-        </dependency>-->
         <!--Eureka client-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -75,30 +64,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-        <!--<dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.4.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-jdk14</artifactId>
-            <version>2.0.5</version>
-        </dependency>-->
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
-        <!--<dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>2.0.7</version>
-            <scope>test</scope>
-        </dependency>-->
-
-        <!--Tracing(brave) & metrics(micrometer)-->
+<!--Tracing(brave) & metrics(micrometer)-->
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-tracing-bridge-brave</artifactId>
@@ -119,14 +85,6 @@
             <artifactId>feign-micrometer</artifactId>
         </dependency>
         <!--micrometer-registry-zipkin & zipkin-reporter-brave の２つでいいかも？-->
-        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
-        <!--<dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>2.20.0</version>
-            <scope>test</scope>
-        </dependency>-->
-
     </dependencies>
 
     <dependencyManagement>
