@@ -15,10 +15,6 @@ public interface NoteProxy {
     @PostMapping(value = "/notes")
     NoteBean addNote(@RequestBody NoteBean note);
 
-    //READ ALL
-    @GetMapping("/notes")
-    List<NoteBean> getAllNote();
-
     //READ
     @GetMapping("/notes/{id}")
     NoteBean getNote(@PathVariable String id);
@@ -35,9 +31,5 @@ public interface NoteProxy {
     //DELETE
     @GetMapping("/notes/delete/{id}")
     void deleteNoteById(@PathVariable String id);
-
-    @GetMapping("/notes/patients/delete/{patientId}")
-    void deleteNoteByPatientId(@PathVariable Long patientId);
-
 
 }

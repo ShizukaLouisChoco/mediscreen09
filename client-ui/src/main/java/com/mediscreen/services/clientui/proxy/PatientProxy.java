@@ -23,10 +23,6 @@ public interface PatientProxy {
     @GetMapping(value ="/patients/{id}")
     PatientBean getPatient(@PathVariable Long id);
 
-    //READ ONE
-    @GetMapping("/patients/family/{family}")
-    PatientBean getPatientByFamily(@PathVariable String family);
-
     //UPDATE
     @PutMapping(value ="/patients/{id}")
     PatientBean updatePatient(@PathVariable Long id, @RequestBody PatientBean patient);

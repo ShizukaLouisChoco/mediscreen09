@@ -21,7 +21,7 @@ public class PatientController {
 
     /**
      * PostMapping - add a new patient
-     * url : http://localhost:9000/patient/add
+     * url : http://localhost:9000/patients
      * @param patient to add
      * @return The saved patient object
      */

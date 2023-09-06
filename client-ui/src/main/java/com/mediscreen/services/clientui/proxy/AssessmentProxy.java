@@ -13,8 +13,4 @@ public interface AssessmentProxy {
 
     @PostMapping("/assess/id")
     ResponseEntity<String> assessById(@RequestParam("patId") Long patientId);
-
-    @PostMapping("/assess/familyName")
-    ResponseEntity<String> assessByFamilyName(@RequestParam("familyName") String familyName);
-
-    }
+}

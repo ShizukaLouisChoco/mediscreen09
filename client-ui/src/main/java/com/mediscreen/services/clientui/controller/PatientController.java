@@ -88,15 +88,6 @@ public class PatientController {
         return "patientPage";
     }
 
-    //READ ONE +
-    @GetMapping(value = "/patients/{id}/history")
-    public String getPatientHistory(@PathVariable Long id, Model model){
-        log.info("getmapping /patients/{id}/history for getPatientHistory()");
-        model.addAttribute("patient",patientProxy.getPatient(id));
-        model.addAttribute("notes",noteProxy.getNoteByPatientId(id));
-        return "patientPage";
-    }
-
 
     //UPDATE
     @PostMapping(value ="/patients/update/{id}")

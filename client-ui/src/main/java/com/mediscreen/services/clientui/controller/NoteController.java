@@ -66,36 +66,6 @@ public class NoteController {
         return "noteAdd";
     }
 
-    //READ ALL
-    @GetMapping("/notes")
-    public String getAllNote( Model model) {
-        log.info("getmapping /notes for getAllNote()");
-        model.addAttribute("notes", noteProxy.getAllNote());
-
-        return "notePage";
-    }
-
-    //READ ONE
-    @GetMapping("/notes/{id}")
-    public String getNote(@PathVariable("id") String id, Model model) {
-        log.info("getmapping /notes returns for getNote()");
-        model.addAttribute("note", noteProxy.getNote(id));
-
-        return "notePage";
-    }
-
-    //READ ALL OF ONE
-    @GetMapping("/notes/patients/{patientId}")
-    public String getNoteByPatientId(@PathVariable Long patientId, Model model) {
-        log.info("getmapping /notes/patients/" + patientId + " for  getnoteByPatientId()");
-
-        model.addAttribute("notes", noteProxy.getNoteByPatientId(patientId));
-
-        return "notePage";
-    }
-
-
-
     //UPDATE FORM
     @GetMapping("/notes/update/{id}")
     public String updateNoteForm(@PathVariable String id, Model model) {
@@ -142,14 +112,4 @@ public class NoteController {
         return "redirect:/patients/"+patientId ;
     }
 
-
-    //DELETE ALL OF ONE
-    @GetMapping("/notes/patients/delete/{patientId}")
-    public String deletePatientNotes(@PathVariable Long patientId) {
-        log.info("deletemapping /notes/patients/{patientId} for deletePatientNotes()");
-
-        noteProxy.deleteNoteByPatientId(patientId);
-
-        return "redirect:/patients/"+patientId;
-    }
 }
