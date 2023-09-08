@@ -18,21 +18,23 @@
         <h1>Create new note</h1>
     </div>
     <!--Patient family name-->
-    <div class="row my-2 justify-content-center">
-        <div class="col-3 ">
-            <p for="patientName" class=" col-form-label ">Patient family name</p>
+    <div th:object="${patient}">
+        <div class="row my-2 justify-content-center" >
+            <div class="col-3 ">
+                <p for="patientName" class=" col-form-label ">Patient family name</p>
+            </div>
+            <div class="col-3 ">
+                <p th:text="*{family}" ></p>
+            </div>
         </div>
-        <div class="col-3 "th:object="${patient}">
-            <p th:text="*{family}" ></p>
-        </div>
-    </div>
-    <!--Patient given name-->
-    <div class="row my-2 justify-content-center">
-        <div class="col-3 ">
-            <p for="patientName" class=" col-form-label ">Patient given name</p>
-        </div>
-        <div class="col-3 "th:object="${patient}">
-            <p th:text="*{given}"></p>
+        <!--Patient given name-->
+        <div class="row my-2 justify-content-center">
+            <div class="col-3 ">
+                <p for="patientName" class=" col-form-label ">Patient given name</p>
+            </div>
+            <div class="col-3 ">
+                <p th:text="*{given}"></p>
+            </div>
         </div>
     </div>
     <form th:action="@{/notes}" method="post" style="width: 100%">
