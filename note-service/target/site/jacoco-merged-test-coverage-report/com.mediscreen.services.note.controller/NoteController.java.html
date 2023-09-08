@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NoteController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">note-service</a> &gt; <a href="index.source.html" class="el_package">com.mediscreen.services.note.controller</a> &gt; <span class="el_source">NoteController.java</span></div><h1>NoteController.java</h1><pre class="source lang-java linenums">package com.mediscreen.services.note.controller;
+
+import com.mediscreen.services.note.entity.Note;
+import com.mediscreen.services.note.service.NoteService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+<span class="fc" id="L10">@Slf4j</span>
+@RestController
+public class NoteController {
+
+    private final NoteService noteService;
+
+<span class="fc" id="L16">    public NoteController(NoteService noteService) {</span>
+<span class="fc" id="L17">        this.noteService = noteService;</span>
+<span class="fc" id="L18">    }</span>
+
+
+    //CREATE
+    /**
+     * PostMapping - Crate new note
+     * url : http://localhost:9100/notes
+     * @return The created note
+     */
+    @PostMapping(&quot;/notes&quot;)
+    public Note addNote(@RequestBody Note note) throws Exception{
+<span class="fc" id="L29">        log.info(&quot;Add new note&quot;);</span>
+<span class="fc" id="L30">        return noteService.addNote(note);</span>
+    }
+
+    //READ ALL
+    /**
+     * GetMapping - Read all notes
+     * url : http://localhost:9100/notes
+     * @return List of all notes
+     */
+    @GetMapping(&quot;/notes&quot;)
+    public List&lt;Note&gt; getAllNote() {
+<span class="fc" id="L41">        log.info(&quot;Get all note&quot;);</span>
+<span class="fc" id="L42">        return noteService.getAllNote();</span>
+    }
+
+    //READ ONE
+    /**
+     * GetMapping - Read one note
+     * url : http://localhost:9100/notes/{id}
+     * @return One note with {id}
+     */
+    @GetMapping(&quot;/notes/{id}&quot;)
+    public Note getNoteById(@PathVariable String id) {
+<span class="fc" id="L53">        log.info(&quot;Get note with id = &quot;+id);</span>
+<span class="fc" id="L54">        return noteService.getNoteById(id);</span>
+    }
+
+    //READ ALL OF ONE
+    /**
+     * GetMapping - Read all note of one patient
+     * url : http://localhost:9100/notes/patients/{patientId}
+     * @return All note of one patient with {patientId}
+     */
+    @GetMapping(&quot;/notes/patients/{patientId}&quot;)
+    public List&lt;Note&gt; getNoteByPatientId(@PathVariable(&quot;patientId&quot;) Long patientId) {
+<span class="fc" id="L65">        log.info(&quot;Get note with id patient = &quot; + patientId);</span>
+<span class="fc" id="L66">        return noteService.getNoteByPatientId(patientId);</span>
+    }
+
+    //UPDATE
+    /**
+     * PutMapping - Update one note
+     * url : http://localhost:9100/notes/{id}
+     * @return Updated note with {id}
+     */
+    @PutMapping(&quot;/notes/{id}&quot;)
+    public Note updateNote(@PathVariable String id,@RequestBody Note note) throws Exception{
+<span class="fc" id="L77">        log.info(&quot;Update note with id = &quot;+ note.getId());</span>
+<span class="fc" id="L78">        return noteService.updateNote(id, note);</span>
+    }
+
+    //DELETE ONE
+    /**
+     * GetMapping - Delete one note
+     * url : http://localhost:9100/notes/delete/{id}
+     */
+    @GetMapping(&quot;/notes/delete/{id}&quot;)
+    public void deleteNote(@PathVariable String id) {
+<span class="fc" id="L88">        log.info(&quot;Delete note form with id = &quot; + id);</span>
+<span class="fc" id="L89">        noteService.deleteNoteById(id);</span>
+<span class="fc" id="L90">    }</span>
+
+    //DELETE ALL OF ONE
+    /**
+     * GetMapping - Delete all notes of patient wirh {id}
+     * url : http://localhost:9100/notes/patients/delete/{patientId}
+     */
+    @GetMapping(&quot;/notes/patients/delete/{patientId}&quot;)
+    public void deleteNoteByPatientId(@PathVariable Long patientId){
+<span class="fc" id="L99">        log.info(&quot;Delete note's Patient id = &quot;+ patientId);</span>
+<span class="fc" id="L100">        noteService.deleteNoteByPatientId(patientId);</span>
+<span class="fc" id="L101">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

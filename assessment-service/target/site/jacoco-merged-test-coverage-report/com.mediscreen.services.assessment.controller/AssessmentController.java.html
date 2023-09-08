@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AssessmentController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assessment-service</a> &gt; <a href="index.source.html" class="el_package">com.mediscreen.services.assessment.controller</a> &gt; <span class="el_source">AssessmentController.java</span></div><h1>AssessmentController.java</h1><pre class="source lang-java linenums">package com.mediscreen.services.assessment.controller;
+
+import com.mediscreen.services.assessment.beans.PatientBean;
+import com.mediscreen.services.assessment.entity.Assessment;
+import com.mediscreen.services.assessment.service.AssessmentService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class AssessmentController {
+
+    private final AssessmentService assessmentService;
+
+<span class="fc" id="L17">    public AssessmentController(AssessmentService assessmentService) {</span>
+<span class="fc" id="L18">        this.assessmentService = assessmentService;</span>
+<span class="fc" id="L19">    }</span>
+
+    /**
+     * PostMapping - create assessment of a patient with {id}
+     * url : http://localhost:9200/assess/id
+     * @param patientId
+     * @return message with assessment
+     */
+    @PostMapping(&quot;/assess/id&quot;)
+    public ResponseEntity&lt;String&gt; assessById(@RequestParam(&quot;patId&quot;) Long patientId) {
+<span class="fc" id="L29">        PatientBean patientToAssess = assessmentService.getPatient(patientId);</span>
+<span class="fc" id="L30">        Assessment assessmentResult =  assessmentService.getAssessmentByPatientId(patientId);</span>
+
+<span class="fc" id="L32">        String responseMessage = &quot;Patient:&quot; +  patientToAssess.getFamily() + &quot; &quot; + patientToAssess.getGiven() + &quot;(age&quot; + assessmentService.calculateAge(patientToAssess) + &quot;) diabetes assessment is:&quot; + assessmentResult;</span>
+
+<span class="fc" id="L34">        return new ResponseEntity&lt;&gt;(responseMessage, HttpStatus.OK);</span>
+    }
+
+    /**
+     * PostMapping - create assessment of a patient with {familyName}
+     * url : http://localhost:9200/assess/familyName
+     * @param familyName
+     * @return message with assessment
+     */
+    @PostMapping(&quot;/assess/familyName&quot;)
+    public ResponseEntity&lt;String&gt; assessByFamilyName(@RequestParam(&quot;familyName&quot;) String familyName) {
+<span class="fc" id="L45">        PatientBean patientToAssess = assessmentService.getPatientByFamily(familyName);</span>
+<span class="fc" id="L46">        Assessment assessmentResult =  assessmentService.getAssessmentByFamilyName(familyName);</span>
+
+<span class="fc" id="L48">        String responseMessage = &quot;Patient:&quot; +  patientToAssess.getFamily() + &quot; &quot; + patientToAssess.getGiven() + &quot;(age&quot; + assessmentService.calculateAge(patientToAssess) + &quot;) diabetes assessment is:&quot; + assessmentResult;</span>
+
+<span class="fc" id="L50">        return new ResponseEntity&lt;&gt;(responseMessage, HttpStatus.OK);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

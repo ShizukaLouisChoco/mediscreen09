@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PatientController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">patient-service</a> &gt; <a href="index.source.html" class="el_package">com.mediscreen.services.patient.controller</a> &gt; <span class="el_source">PatientController.java</span></div><h1>PatientController.java</h1><pre class="source lang-java linenums">package com.mediscreen.services.patient.controller;
+
+import com.mediscreen.services.patient.entity.Patient;
+import com.mediscreen.services.patient.exception.PatientErrorException;
+import com.mediscreen.services.patient.service.PatientService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+<span class="fc" id="L12">@Slf4j</span>
+@RestController
+public class PatientController {
+
+    private final PatientService patientService;
+
+<span class="fc" id="L18">    public PatientController(PatientService patientService) {</span>
+<span class="fc" id="L19">        this.patientService = patientService;</span>
+<span class="fc" id="L20">    }</span>
+
+    /**
+     * PostMapping - add a new patient
+     * url : http://localhost:9000/patients
+     * @param patient to add
+     * @return The saved patient object
+     */
+    @PostMapping(value = &quot;/patients&quot;)
+    public Patient createPatient(@RequestBody Patient patient){
+<span class="fc" id="L30">        log.info(&quot;.createPerson&quot;);</span>
+<span class="fc" id="L31">        log.info(&quot;Accessed endpoint URL:/patient&quot;);</span>
+<span class="fc" id="L32">        log.debug(&quot;Request details: POSTMapping, Body patient :{}&quot;, patient);</span>
+<span class="fc" id="L33">        return patientService.createPatient(patient);</span>
+    }
+
+
+    /**
+     * GetMapping - Get all patients
+     * url : http://localhost:9000/patients
+     * @return list of all patients
+     */
+    @GetMapping(&quot;/patients&quot;)
+    public List&lt;Patient&gt; getAllPatients(){
+<span class="fc" id="L44">        log.info(&quot;.getAllPatients&quot;);</span>
+<span class="fc" id="L45">        log.info(&quot;Accessed endpoint URL:/patients&quot;);</span>
+<span class="fc" id="L46">        log.debug(&quot;Request details: GETMapping&quot;);</span>
+
+<span class="fc" id="L48">        return patientService.getPatients();</span>
+    }
+
+    /**
+     * GetMapping - Get patient
+     * url : http://localhost:9000/patients/{id}
+     * @return patient info with patientId
+     */
+    @GetMapping(&quot;/patients/{id}&quot;)
+    public Optional&lt;Patient&gt; getPatient(@PathVariable Long id){
+<span class="fc" id="L58">        log.info(&quot;.getPatient&quot;);</span>
+<span class="fc" id="L59">        log.info(&quot;Accessed endpoint URL:/patient/get&quot;);</span>
+<span class="fc" id="L60">        log.debug(&quot;Request details: GETMapping&quot;);</span>
+
+<span class="fc" id="L62">        return Optional.of(patientService.getPatient(id));</span>
+    }
+
+    /**
+     * GetMapping - Get patient by family
+     * url : http://localhost:9000/patients/family/{family}
+     * @return patient info with patient family
+     */
+    @GetMapping(&quot;/patients/family/{family}&quot;)
+    public Optional&lt;Patient&gt; getPatientByFamily(@PathVariable String family){
+<span class="fc" id="L72">        log.info(&quot;.getPatient&quot;);</span>
+<span class="fc" id="L73">        log.info(&quot;Accessed endpoint URL:/patient/{family}&quot;);</span>
+<span class="fc" id="L74">        log.debug(&quot;Request details: GETMapping&quot;);</span>
+
+<span class="fc" id="L76">        return Optional.of(patientService.getPatientByFamily(family));</span>
+    }
+
+
+    /**
+     * PutMapping - Update an existing patient
+     * url : http://localhost:9000/patients/{id}
+     * @return The updated patient updated
+     */
+    @PutMapping(&quot;/patients/{id}&quot;)
+    public Patient updatePatient(@PathVariable Long id, @RequestBody Patient patient) throws PatientErrorException {
+<span class="fc" id="L87">        log.info(&quot;heading to /patients/{id} put mapping&quot;);</span>
+<span class="fc" id="L88">        Patient updatePatient = patientService.updatePatient(id, patient);</span>
+<span class="fc" id="L89">        log.info(&quot;patient information updated&quot;);</span>
+
+<span class="fc" id="L91">        return updatePatient;</span>
+    }
+
+    /**
+     * GetMapping - Delete existing patient
+     * url : http://localhost:9000/patients/{id}
+     */
+
+    @GetMapping(&quot;patients/delete/{id}&quot;)
+    public void deletePatient(@PathVariable(&quot;id&quot;) Long id){
+<span class="fc" id="L101">        log.info(&quot;.deletePatient&quot;);</span>
+<span class="fc" id="L102">        patientService.deletePatient(id);</span>
+<span class="fc" id="L103">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>
