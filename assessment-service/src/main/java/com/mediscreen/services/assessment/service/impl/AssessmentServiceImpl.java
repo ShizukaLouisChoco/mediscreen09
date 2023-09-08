@@ -59,7 +59,7 @@ public class AssessmentServiceImpl implements AssessmentService {
 
         // Man under 30
         if(age < 30 ) {
-            if (gender.equals(PatientBean.Gender.M)) {
+            if (PatientBean.Gender.M.equals(gender)) {
                 if (triggerScore <= 2) {
                     return Assessment.None;
                 }
@@ -72,7 +72,7 @@ public class AssessmentServiceImpl implements AssessmentService {
             }
 
             // woman under 30
-            else if (gender.equals(PatientBean.Gender.F) ) {
+            else if (PatientBean.Gender.F.equals(gender) ) {
 
                 if (triggerScore <= 3) {
                     return Assessment.None;
