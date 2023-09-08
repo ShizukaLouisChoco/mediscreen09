@@ -71,7 +71,12 @@
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-tracing-bridge-brave</artifactId>
 		</dependency>
-		<!--metrics-->
+		<!--metrics distributed system-->
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-tracing</artifactId>
+		</dependency>
+		<!--metrics inside application-->
 		<dependency>
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-observation</artifactId>
@@ -82,6 +87,11 @@
 			<artifactId>zipkin-reporter-brave</artifactId>
 		</dependency>
 		<!--micrometer-registry-zipkin & zipkin-reporter-brave の２つでいいかも？-->
+		<!--Feign & micrometer-->
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-micrometer</artifactId>
+		</dependency>
 <!--Utility-->
 		<!--lombok-->
 		<dependency>

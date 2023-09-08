@@ -42,6 +42,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+<!--Spring cloud-->
         <!--Eureka client-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -58,7 +59,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--Utility-->
+<!--Utility-->
         <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -69,7 +70,12 @@
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-tracing-bridge-brave</artifactId>
         </dependency>
-        <!--metrics-->
+        <!--metrics distributed system-->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-tracing</artifactId>
+        </dependency>
+        <!--metrics inside application-->
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-observation</artifactId>
