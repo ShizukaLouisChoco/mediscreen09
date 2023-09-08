@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
+@FeignClient(name = "note-service")
 @LoadBalancerClient(name = "note-service")
-@FeignClient(name = "note-service", url = "${spring.cloud.openfeign.client.config.note-service.url}")
 public interface NoteProxy {
 
     @GetMapping("/notes/patients/{id}")

@@ -98,6 +98,8 @@ services:
     environment:
      eureka.client.serviceUrl.defaultZone: http://discovery-service:8061/eureka/
      ZIPKIN_HOST: zipkin
+     spring.cloud.openfeign.client.config.patient-service.url: http://patient-service:9000
+     spring.cloud.openfeign.client.config.note-service.url: http://note-service:9100
     depends_on:
       - discovery-service
 

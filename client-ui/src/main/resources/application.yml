@@ -12,26 +12,30 @@ spring:
     openfeign:
       client:
         config:
-          assessment-service:
-            url: http://localhost:9200
-          note-service:
-            url: http://localhost:9100
           patient-service:
             url: http://localhost:9000
+          note-service:
+            url: http://localhost:9100
+          assessment-service:
+            url: http://localhost:9200
 
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8061/eureka/
 
-
 management:
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+    propagation:
+      type: w3c
   zipkin:
     tracing:
       endpoint: http://${ZIPKIN_HOST:localhost}:9411/api/v2/spans
 
-
 mediscreen:
   proxy:
     - patient: localhost
-    - note:
+    - note: localhost

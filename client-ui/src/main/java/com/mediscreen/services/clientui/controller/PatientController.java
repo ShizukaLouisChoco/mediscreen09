@@ -17,7 +17,6 @@ public class PatientController {
 
     private final PatientProxy patientProxy;
     private final NoteProxy noteProxy;
-
     private final AssessmentProxy assessmentProxy;
 
 
@@ -79,7 +78,8 @@ public class PatientController {
         try{
             log.info("creating assessment by patient id : "+ id);
             String assessment = assessmentProxy.assessById(id).toString();
-            model.addAttribute("assessment",assessment.substring(assessment.indexOf("diabetes assessment is:") + "diabetes assessment is:".length()).split(",")[0].trim());
+            model.addAttribute("assessment",assessment.substring
+                    (assessment.indexOf("diabetes assessment is:") + "diabetes assessment is:".length()).split(",")[0].trim());
         }catch(Exception exception){
             log.error(String.valueOf(exception));
             model.addAttribute("errorMsg",exception.getMessage());

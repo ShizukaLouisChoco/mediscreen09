@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Slf4j
 @Controller
@@ -36,22 +33,21 @@ public class NoteController {
     public String addNote(@Valid @ModelAttribute("note") NoteBean note, BindingResult result, Model model) throws Exception {
         log.info("postmapping /notes for addNote()");
         model.addAttribute("note", note);
+        model.addAttribute("patient",patientProxy.getPatient(note.getPatientId()));
         if(result.hasErrors()) {
             log.info("validation error !");
-            List<String> results = new ArrayList<>(Arrays.asList(result.toString().split("\\s*,\\s*")));
-            model.addAttribute("result",results);
             return "noteAdd";
         }try{
             log.info("creating new note");
             note.setId("");
             noteProxy.addNote(note);
-            model.addAttribute("notes",noteProxy.getNoteByPatientId(note.getPatientId()));
         }catch(Exception exception){
             model.addAttribute("note",note);
             log.error(String.valueOf(exception));
             model.addAttribute("errorMsg",exception.getMessage());
             return "noteAdd";
         }
+        log.info("note is created");
         return "redirect:/patients/"+note.getPatientId();
     }
 
@@ -82,9 +78,9 @@ public class NoteController {
     public String updateNote(@PathVariable String id, @Valid @ModelAttribute("note") NoteBean note, BindingResult result, Model model) throws NoteErrorException{
         log.info("putmapping /notes/update for updateNote()");
         model.addAttribute("note",note);
+        model.addAttribute("patient",patientProxy.getPatient(note.getPatientId()));
         if(result.hasErrors()){
             log.info("validation error");
-            model.addAttribute("note",note);
             return "noteUpdate";
         }try{
             log.info("updating note");
